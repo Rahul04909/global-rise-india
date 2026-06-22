@@ -1,5 +1,35 @@
 <?php
+require_once __DIR__ . '/includes/auth-check.php';
+
 $currentPage = basename($_SERVER['SCRIPT_NAME']);
+$targetPage = $currentPage;
+$subPageTitle = '';
+
+if ($currentPage === 'volunteer-add.php') {
+    $targetPage = 'volunteers.php';
+    $subPageTitle = 'Add Volunteer';
+} elseif ($currentPage === 'volunteer-edit.php') {
+    $targetPage = 'volunteers.php';
+    $subPageTitle = 'Edit Volunteer';
+} elseif ($currentPage === 'volunteer-view.php') {
+    $targetPage = 'volunteers.php';
+    $subPageTitle = 'View Volunteer Details';
+} elseif ($currentPage === 'plan-add.php') {
+    $targetPage = 'plans.php';
+    $subPageTitle = 'Add Support Plan';
+} elseif ($currentPage === 'plan-edit.php') {
+    $targetPage = 'plans.php';
+    $subPageTitle = 'Edit Support Plan';
+} elseif ($currentPage === 'donation-add.php') {
+    $targetPage = 'donations.php';
+    $subPageTitle = 'Add Donation';
+} elseif ($currentPage === 'donation-edit.php') {
+    $targetPage = 'donations.php';
+    $subPageTitle = 'Edit Donation Details';
+} elseif ($currentPage === 'donation-view.php') {
+    $targetPage = 'donations.php';
+    $subPageTitle = 'View Donation Details';
+}
 
 $menuItems = [
     [
@@ -7,6 +37,21 @@ $menuItems = [
         "icon" => "fas fa-home",
         "pages" => [
             ["title" => "Home", "url" => "index.php"]
+        ],
+    ],
+    [
+        "menuTitle" => "Volunteers",
+        "icon" => "fas fa-hands-helping",
+        "pages" => [
+            ["title" => "Manage Volunteers", "url" => "volunteers.php"],
+            ["title" => "Support Plans", "url" => "plans.php"]
+        ],
+    ],
+    [
+        "menuTitle" => "Donations",
+        "icon" => "fas fa-heart",
+        "pages" => [
+            ["title" => "Manage Donations", "url" => "donations.php"]
         ],
     ],
     [
@@ -21,16 +66,19 @@ $menuItems = [
 $active_pageInfo = null;
 foreach ($menuItems as $menuItem) {
     foreach ($menuItem['pages'] as $page) {
-        if ($currentPage === $page['url']) {
+        if ($targetPage === $page['url']) {
             $active_pageInfo = [
                 "breadcrumb_Items" => [
                     ["title" => $menuItem['menuTitle'], "url" => "#"],
                     ["title" => $page['title'], "url" => $page['url']]
                 ],
-                "page_title" => $page['title'],
+                "page_title" => $subPageTitle ?: $page['title'],
                 "active_menu" => $menuItem,
                 "active_page" => $page
             ];
+            if (!empty($subPageTitle)) {
+                $active_pageInfo["breadcrumb_Items"][] = ["title" => $subPageTitle, "url" => "#"];
+            }
             break 2;
         }
     }
@@ -50,7 +98,7 @@ $active_page = $active_pageInfo['active_page'] ?? null;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <title><?= htmlspecialchars($page_title) ?></title>
-    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.png" type="image/png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css" rel="stylesheet">
@@ -81,9 +129,8 @@ $active_page = $active_pageInfo['active_page'] ?? null;
 
         /* Brand Logo Area */
         .brand-link {
-            background-color: var(--primary-green) !important;
-            color: #fff !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            background-color: var(--sidebar-bg) !important;
+            border-bottom: 1px solid #dcdcde !important;
             padding: 15px !important;
             display: flex !important;
             justify-content: center !important;
@@ -369,34 +416,8 @@ $active_page = $active_pageInfo['active_page'] ?? null;
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <div class="nav-link">
-                        <i class="fas fa-th-large"></i>
-                    </div>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="./" class="nav-link">Home</a>
-                </li>
-            </ul>
-            <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" name="search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#messages">
-                        <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">2</span>
-                    </a>
-                </li>
-                <li class="nav-item dropdown"><a class="nav-link" href="#notifications">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">5</span>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button">
+                        <i class="fas fa-bars"></i>
                     </a>
                 </li>
             </ul>
@@ -423,16 +444,16 @@ $active_page = $active_pageInfo['active_page'] ?? null;
 
         <aside class="main-sidebar sidebar-light-primary elevation-4">
             <a href="./" class="brand-link">
-                <img src="./src/images/prayag-computer-logo.png" alt="Logo" class="brand-image img-circle bg-white">
+                <img src="../assets/logo.png" alt="Logo" class="brand-image" style="max-height: 40px; width: auto; object-fit: contain;">
             </a>
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-3">
-                    <a href="./profile.php" class="d-flex">
+                    <a href="./profile.php" class="d-flex align-items-center">
                         <div class="image">
-                            <img src="./src/images/user-avtar.png" class="img-circle elevation-2 bg-white" alt="User Image">
+                            <img src="<?= !empty($current_admin['profile_image']) ? htmlspecialchars('../' . $current_admin['profile_image']) : './src/images/user-avtar.png' ?>" class="img-circle elevation-2 bg-white" alt="User Image" style="width: 33px; height: 33px; object-fit: cover;">
                         </div>
-                        <div class="info">
-                            Rahul
+                        <div class="info" style="color: var(--sidebar-color) !important; font-weight: 600;">
+                            <?= htmlspecialchars($current_admin['name']) ?>
                         </div>
                     </a>
                 </div>

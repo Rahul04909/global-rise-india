@@ -44,6 +44,30 @@ if ($pos !== false) {
 
     <!-- Main Donation Card Form -->
     <div class="donate-form-card">
+      
+      <!-- Success Panel (Hidden by default) -->
+      <div id="donSuccessPanel" style="display: none; text-align: center; padding: 40px 20px;">
+          <div class="mb-4">
+              <i class="fa-solid fa-circle-check text-success" style="font-size: 5rem; color: #28a745;"></i>
+          </div>
+          <h2 class="text-success font-weight-bold mb-3" style="color: #28a745; font-family: 'Montserrat', sans-serif;">Thank You for Your Contribution!</h2>
+          <p class="lead mb-4" style="font-size: 1.1rem; color: #4a5568; line-height: 1.6;">
+              Your payment has been securely processed. An official receipt and confirmation email have been sent to your email address.
+          </p>
+          <div class="bg-light p-4 rounded border mb-4" style="max-width: 450px; margin: 0 auto; background-color: #f7fafc; border: 1px solid #e2e8f0; border-radius: 8px;">
+              <span class="d-block text-muted small uppercase font-weight-bold" style="font-size: 0.75rem; letter-spacing: 1px; color: #718096;">TRANSACTION REFERENCE</span>
+              <strong id="donRefBadge" class="text-primary" style="font-size: 1.3rem; color: #1b5182; font-family: monospace;">DON-00000</strong>
+          </div>
+          <p class="text-muted small">
+              If you requested an 80(G) tax exemption certificate, it will be dispatched within 15 working days.
+          </p>
+          <div class="mt-4">
+              <a href="index.php" class="btn-donate-submit" style="display: inline-flex; width: auto; padding: 12px 30px; text-decoration: none; align-items: center; justify-content: center;">
+                  <i class="fa-solid fa-house mr-2" style="margin-right: 8px;"></i> Back to Home
+              </a>
+          </div>
+      </div>
+
       <form id="donationForm" method="POST" action="#" novalidate>
         
         <!-- Hidden Inputs for Form State tracking -->
@@ -238,6 +262,9 @@ if ($pos !== false) {
 
   </div>
 </div>
+
+<!-- Razorpay Checkout SDK -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <!-- Form Logic Script -->
 <script>
@@ -558,31 +585,105 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('error-consent').style.display = 'none';
     }
 
-    // 12. Submit process (Show confirmation and simulate redirection to payment gateway)
+    // 12. Submit process (Razorpay Integration)
     if (isValid) {
-      const totalAmount = document.getElementById('hiddenTotal').value;
-      const donorName = document.getElementById('donorName').value.trim();
-      
-      // Disable button to prevent double-click
       submitBtn.disabled = true;
       submitBtn.style.opacity = '0.75';
-      submitBtn.querySelector('span').textContent = 'Processing...';
+      submitBtn.querySelector('span').textContent = 'Initializing Payment...';
 
-      setTimeout(() => {
-        alert(`Thank you, ${donorName}!\n\nYour pledge of ₹${parseInt(totalAmount).toLocaleString('en-IN')} has been submitted. Simulated transaction redirecting to Payment Gateway...`);
-        // Reset form
-        form.reset();
-        request80g.checked = false;
-        exemptionSubform.classList.remove('open');
+      const showSubmitError = (msg) => {
+        alert(msg);
         submitBtn.disabled = false;
         submitBtn.style.opacity = '1';
-        
-        // Return default state
-        currentCause = 'feed';
-        baseAmount = 4500;
-        renderGrid();
-        recalculateAll();
-      }, 1500);
+        submitBtn.querySelector('span').textContent = 'Proceed to Donate ₹' + parseInt(document.getElementById('hiddenTotal').value).toLocaleString('en-IN');
+      };
+
+      (async () => {
+        try {
+          // Step 1: Create Razorpay Order
+          const fd = new FormData();
+          fd.append('amount', document.getElementById('hiddenTotal').value);
+          fd.append('selected_cause', currentCause);
+          fd.append('donation_type', document.querySelector('[name="donation_type"]:checked').value);
+
+          const orderResp = await fetch('api/create-donation-order.php', {
+            method: 'POST',
+            body: fd
+          });
+          const orderData = await orderResp.json();
+
+          if (!orderData.success) {
+            showSubmitError(orderData.message || 'Payment Order generation failed.');
+            return;
+          }
+
+          // Step 2: Open Razorpay Checkout modal
+          const options = {
+            "key": orderData.key_id,
+            "amount": orderData.amount,
+            "currency": "INR",
+            "name": "The Global Rise Foundation",
+            "description": "Donation Support for " + tabData[currentCause].title,
+            "image": "assets/logo.png",
+            "order_id": orderData.order_id,
+            "handler": async function (paymentResp) {
+              submitBtn.querySelector('span').textContent = 'Verifying Transaction...';
+
+              try {
+                // Step 3: Send signatures and form inputs to backend submission API
+                const submitFd = new FormData(form);
+                submitFd.append('razorpay_payment_id', paymentResp.razorpay_payment_id);
+                submitFd.append('razorpay_order_id', paymentResp.razorpay_order_id);
+                submitFd.append('razorpay_signature', paymentResp.razorpay_signature);
+
+                // Add values that might not be raw form inputs
+                submitFd.set('selected_cause', currentCause);
+                submitFd.set('total_donation', document.getElementById('hiddenTotal').value);
+
+                const regResp = await fetch('api/submit-donation.php', {
+                  method: 'POST',
+                  body: submitFd
+                });
+                const regData = await regResp.json();
+
+                if (regData.success) {
+                  form.style.display = 'none';
+                  document.querySelector('.donate-tabs').style.display = 'none';
+                  const successPnl = document.getElementById('donSuccessPanel');
+                  successPnl.style.display = 'block';
+                  document.getElementById('donRefBadge').textContent = regData.reference || 'DON-00001';
+                  successPnl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                  showSubmitError(regData.message || 'Payment verified but donation log failed.');
+                }
+              } catch (err) {
+                showSubmitError('Network connection error during payment validation. Please contact us with Payment ID: ' + paymentResp.razorpay_payment_id);
+              }
+            },
+            "prefill": {
+              "name": document.getElementById('donorName').value.trim(),
+              "email": document.getElementById('donorEmail').value.trim(),
+              "contact": document.getElementById('donorMobile').value.trim()
+            },
+            "theme": {
+              "color": "#1b5182"
+            },
+            "modal": {
+              "ondismiss": function() {
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+                submitBtn.querySelector('span').textContent = 'Proceed to Donate ₹' + parseInt(document.getElementById('hiddenTotal').value).toLocaleString('en-IN');
+              }
+            }
+          };
+
+          const rzp = new Razorpay(options);
+          rzp.open();
+
+        } catch (err) {
+          showSubmitError('Failed to communicate with payment server. Please verify your connection.');
+        }
+      })();
     }
   });
 

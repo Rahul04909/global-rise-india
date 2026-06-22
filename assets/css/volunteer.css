@@ -263,6 +263,9 @@
 /* Form fieldset panels */
 .vol-fieldset {
   display: none;
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 
 .vol-fieldset.active {

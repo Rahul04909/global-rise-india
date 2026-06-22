@@ -1,3 +1,27 @@
+<?php
+/**
+ * volunteer.php
+ * ============================================================
+ * Volunteer Registration Wizard Portal
+ * The Global Rise Foundation
+ *
+ * Implements a 5-step registration wizard including support plan selection
+ * and Razorpay payment checkout integration.
+ * ============================================================
+ */
+
+require_once __DIR__ . '/includes/config.php';
+
+try {
+    $pdo = getDB();
+    // Retrieve active support plans ordered by price
+    $plansStmt = $pdo->query("SELECT * FROM `volunteer_plans` WHERE `status` = 'active' ORDER BY `price` ASC");
+    $activePlans = $plansStmt->fetchAll();
+} catch (PDOException $e) {
+    $activePlans = [];
+    error_log('[Volunteer Page Config] Failed fetching plans: ' . $e->getMessage());
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +58,87 @@
       flex-direction: column;
     }
     main { flex: 1; }
+
+    /* ── Plan Selection Card Styles ── */
+    .vol-plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 15px;
+    }
+    .vol-plan-card {
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 24px 20px;
+      background: #ffffff;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .vol-plan-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      border-color: #cbd5e0;
+    }
+    .vol-plan-card.selected {
+      border-color: #1b5182;
+      background-color: #f0f7ff;
+      box-shadow: 0 10px 25px rgba(27, 81, 130, 0.1);
+    }
+    .vol-plan-card.selected .plan-title {
+      color: #1b5182;
+    }
+    .plan-badge {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    .plan-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 8px;
+    }
+    .plan-price {
+      font-size: 22px;
+      font-weight: 800;
+      color: #1b5182;
+      margin-bottom: 8px;
+    }
+    .plan-duration {
+      font-size: 11px;
+      font-weight: 500;
+      color: #718096;
+      margin-left: 4px;
+    }
+    .plan-desc {
+      font-size: 12px;
+      color: #4a5568;
+      line-height: 1.5;
+    }
+    .vol-plan-card::after {
+      content: '\f058';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 18px;
+      color: #1b5182;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.2s ease;
+    }
+    .vol-plan-card.selected::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .d-none {
+      display: none !important;
+    }
   </style>
 </head>
 <body class="volunteer-page">
@@ -42,9 +147,7 @@
 
   <main>
 
-    <!-- ═══════════════════════════════════════════════════
-         HERO BANNER
-    ═══════════════════════════════════════════════════ -->
+    <!-- HERO BANNER -->
     <section class="volunteer-hero" aria-label="Volunteer Page Hero">
       <div class="header-container">
         <nav class="vol-breadcrumbs" aria-label="Breadcrumb">
@@ -60,9 +163,7 @@
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════
-         WHY VOLUNTEER
-    ═══════════════════════════════════════════════════ -->
+    <!-- WHY VOLUNTEER -->
     <section class="vol-why-section" aria-labelledby="whyVolunteerHeading">
       <div class="header-container">
         <h2 class="vol-section-heading" id="whyVolunteerHeading">Why Volunteer with Us?</h2>
@@ -90,9 +191,7 @@
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════
-         VOLUNTEER REGISTRATION FORM
-    ═══════════════════════════════════════════════════ -->
+    <!-- VOLUNTEER REGISTRATION FORM -->
     <section class="vol-form-section" aria-labelledby="volunteerFormHeading">
       <div class="header-container">
 
@@ -100,7 +199,7 @@
 
         <div class="vol-form-card">
 
-          <!-- ── Progress Steps ── -->
+          <!-- ── Progress Steps (5 Steps) ── -->
           <div class="vol-form-steps" id="volSteps" role="tablist" aria-label="Form progress">
             <div class="vol-step active" id="step-ind-1" role="tab" aria-selected="true">
               <div class="vol-step-number"><span>1</span></div>
@@ -119,16 +218,19 @@
             <div class="vol-step-connector" id="conn-3-4"></div>
             <div class="vol-step" id="step-ind-4" role="tab" aria-selected="false">
               <div class="vol-step-number"><span>4</span></div>
-              <div class="vol-step-label">Confirm</div>
+              <div class="vol-step-label">Support Plan</div>
+            </div>
+            <div class="vol-step-connector" id="conn-4-5"></div>
+            <div class="vol-step" id="step-ind-5" role="tab" aria-selected="false">
+              <div class="vol-step-number"><span>5</span></div>
+              <div class="vol-step-label">Pay &amp; Confirm</div>
             </div>
           </div><!-- /.vol-form-steps -->
 
           <!-- ── Form ── -->
           <form id="volunteerForm" method="POST" action="api/submit-volunteer.php" novalidate>
 
-            <!-- ────────────────────────────────────
-                 STEP 1 — Personal Information
-            ──────────────────────────────────── -->
+            <!-- STEP 1 — Personal Information -->
             <fieldset class="vol-fieldset active" id="vol-step-1" aria-labelledby="step1-title">
               <div class="vol-fieldset-title" id="step1-title">
                 <i class="fa-solid fa-user"></i> Personal Information
@@ -217,9 +319,7 @@
 
             </fieldset>
 
-            <!-- ────────────────────────────────────
-                 STEP 2 — Volunteer Details
-            ──────────────────────────────────── -->
+            <!-- STEP 2 — Volunteer Details -->
             <fieldset class="vol-fieldset" id="vol-step-2" aria-labelledby="step2-title">
               <div class="vol-fieldset-title" id="step2-title">
                 <i class="fa-solid fa-hands-helping"></i> Volunteer Details
@@ -325,9 +425,7 @@
 
             </fieldset>
 
-            <!-- ────────────────────────────────────
-                 STEP 3 — Background & Emergency
-            ──────────────────────────────────── -->
+            <!-- STEP 3 — Background & Emergency -->
             <fieldset class="vol-fieldset" id="vol-step-3" aria-labelledby="step3-title">
               <div class="vol-fieldset-title" id="step3-title">
                 <i class="fa-solid fa-file-lines"></i> Background & Emergency Contact
@@ -389,12 +487,50 @@
 
             </fieldset>
 
-            <!-- ────────────────────────────────────
-                 STEP 4 — Review & Submit
-            ──────────────────────────────────── -->
+            <!-- STEP 4 [NEW] — Support Plan Selection -->
             <fieldset class="vol-fieldset" id="vol-step-4" aria-labelledby="step4-title">
               <div class="vol-fieldset-title" id="step4-title">
-                <i class="fa-solid fa-clipboard-check"></i> Review &amp; Confirm
+                <i class="fa-solid fa-gift"></i> Select a Support Plan
+              </div>
+              <p class="vol-step-desc" style="color: #718096; margin-bottom: 20px; font-size: 14px; line-height: 1.6;">
+                Every volunteer registration helps sustain our field activities, animal feeding, children supplies, and healthcare drives. Please select a monthly, yearly or lifetime support plan below:
+              </p>
+              
+              <div class="vol-plans-grid">
+                <?php if (empty($activePlans)): ?>
+                  <p class="text-muted">No support plans are currently configured. Please contact the administrator.</p>
+                <?php else: ?>
+                  <?php foreach ($activePlans as $plan): 
+                      $price_formatted = '₹' . number_format($plan['price'], 0);
+                      $duration_lbl = '';
+                      if ($plan['duration_unit'] === 'month') {
+                          $duration_lbl = $plan['duration_value'] == 1 ? '/ Month' : '/ ' . $plan['duration_value'] . ' Months';
+                      } elseif ($plan['duration_unit'] === 'year') {
+                          $duration_lbl = $plan['duration_value'] == 1 ? '/ Year' : '/ ' . $plan['duration_value'] . ' Years';
+                      } elseif ($plan['duration_unit'] === 'lifetime') {
+                          $duration_lbl = 'Lifetime';
+                      } elseif ($plan['duration_unit'] === 'onetime') {
+                          $duration_lbl = 'One-Time';
+                      }
+                  ?>
+                  <div class="vol-plan-card" onclick="selectSupportPlan(<?= $plan['id'] ?>)">
+                    <input type="radio" name="plan_id" id="plan-<?= $plan['id'] ?>" value="<?= $plan['id'] ?>" class="d-none">
+                    <div class="plan-badge">
+                        <i class="fas <?= $plan['duration_unit'] === 'lifetime' ? 'fa-crown text-warning' : 'fa-star text-primary' ?>"></i>
+                    </div>
+                    <h3 class="plan-title"><?= htmlspecialchars($plan['title']) ?></h3>
+                    <div class="plan-price"><?= $price_formatted ?><span class="plan-duration"><?= $duration_lbl ?></span></div>
+                    <p class="plan-desc"><?= htmlspecialchars($plan['description']) ?></p>
+                  </div>
+                  <?php endforeach; ?>
+                <?php endif; ?>
+              </div>
+            </fieldset>
+
+            <!-- STEP 5 — Review & Confirm -->
+            <fieldset class="vol-fieldset" id="vol-step-5" aria-labelledby="step5-title">
+              <div class="vol-fieldset-title" id="step5-title">
+                <i class="fa-solid fa-clipboard-check"></i> Review &amp; Pay
               </div>
 
               <!-- Summary table populated by JS -->
@@ -416,12 +552,12 @@
                 </div>
               </div>
 
-              <!-- Error / Info banner -->
-              <div id="volErrorBanner" style="display:none;background:#fff5f5;border:1px solid #fed7d7;
-                border-radius:6px;padding:14px 18px;margin-bottom:10px;color:#c53030;font-size:13px;
-                font-weight:600;"></div>
-
             </fieldset>
+
+            <!-- Error / Info banner (Placed outside individual fieldsets for global visibility) -->
+            <div id="volErrorBanner" style="display:none;background:#fff5f5;border:1px solid #fed7d7;
+              border-radius:6px;padding:14px 18px;margin-bottom:20px;color:#c53030;font-size:13px;
+              font-weight:600;"></div>
 
             <!-- ── Navigation Buttons ── -->
             <div class="vol-form-nav">
@@ -434,8 +570,8 @@
                 Next <i class="fa-solid fa-arrow-right"></i>
               </button>
               <button type="submit" class="vol-btn vol-btn-submit" id="volSubmitBtn"
-                style="display:none;" aria-label="Submit volunteer application">
-                <i class="fa-solid fa-paper-plane"></i> Submit Application
+                style="display:none;" aria-label="Pay and complete registration">
+                <i class="fa-solid fa-credit-card"></i> Pay &amp; Join
               </button>
             </div>
 
@@ -446,7 +582,7 @@
             <div class="vol-success-icon"><i class="fa-solid fa-check"></i></div>
             <h2>Application Submitted!</h2>
             <p>Thank you for joining The Global Rise Foundation volunteer team.</p>
-            <p>A confirmation email has been sent to your registered address.</p>
+            <p>A confirmation email and transaction details have been sent to your inbox.</p>
             <div class="vol-ref-badge" id="volRefBadge">Reference: Loading…</div>
             <p style="margin-top:10px;">Our Volunteer Coordination team will contact you within 3–5 business days.</p>
             <a href="index.php" class="vol-btn vol-btn-next" style="margin:25px auto 0;display:inline-flex;">
@@ -462,6 +598,9 @@
 
   <?php include 'includes/footer.php'; ?>
 
+  <!-- Razorpay Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
   <!-- ═══════════════════════════════════════════════════
        VOLUNTEER FORM — MULTI-STEP JAVASCRIPT
   ═══════════════════════════════════════════════════ -->
@@ -470,7 +609,7 @@
     'use strict';
 
     /* ── State ── */
-    const TOTAL_STEPS = 4;
+    const TOTAL_STEPS = 5;
     let currentStep  = 1;
 
     /* ── Element References ── */
@@ -504,6 +643,17 @@
     const rangeEl = document.getElementById('hours_range');
     if (rangeEl) rangeEl.style.setProperty('--pct', '10.26%'); // initial 5/40
 
+    /* ── Support Plan Selection Trigger ── */
+    window.selectSupportPlan = function(planId) {
+      document.querySelectorAll('.vol-plan-card').forEach(card => {
+        card.classList.remove('selected');
+      });
+      const card = document.getElementById('plan-' + planId).closest('.vol-plan-card');
+      card.classList.add('selected');
+      document.getElementById('plan-' + planId).checked = true;
+      errBanner.style.display = 'none';
+    };
+
     /* ── Step navigation helpers ── */
     function showStep(n) {
       // Hide all fieldsets
@@ -514,10 +664,12 @@
       // Update step indicators
       for (let i = 1; i <= TOTAL_STEPS; i++) {
         const ind  = document.getElementById('step-ind-' + i);
-        ind.classList.remove('active', 'done');
-        if (i < n)       ind.classList.add('done');
-        else if (i === n) ind.classList.add('active');
-        ind.setAttribute('aria-selected', i === n ? 'true' : 'false');
+        if (ind) {
+          ind.classList.remove('active', 'done');
+          if (i < n)       ind.classList.add('done');
+          else if (i === n) ind.classList.add('active');
+          ind.setAttribute('aria-selected', i === n ? 'true' : 'false');
+        }
       }
 
       // Connectors
@@ -531,8 +683,8 @@
       nextBtn.style.display   = n < TOTAL_STEPS ? 'inline-flex' : 'none';
       submitBtn.style.display = n === TOTAL_STEPS ? 'inline-flex' : 'none';
 
-      // Build summary on step 4
-      if (n === 4) buildSummary();
+      // Build summary on step 5
+      if (n === 5) buildSummary();
 
       errBanner.style.display = 'none';
       currentStep = n;
@@ -576,10 +728,21 @@
       }
 
       if (n === 3) {
-        // No hard-required fields in step 3, so just pass
+        // Emergency contact validation
+        const ePhone = document.getElementById('emergency_phone').value.trim();
+        if (ePhone.length > 0 && !/^[6-9]\d{9}$/.test(ePhone)) {
+          messages.push('Emergency contact mobile must be a valid 10-digit number.');
+        }
       }
 
       if (n === 4) {
+        const plan = document.querySelector('[name="plan_id"]:checked');
+        if (!plan) {
+          messages.push('Please select a support plan to support your registration.');
+        }
+      }
+
+      if (n === 5) {
         if (!document.getElementById('agree_terms').checked) {
           messages.push('You must agree to the Terms & Conditions to proceed.');
         }
@@ -596,10 +759,19 @@
         return el ? el.value : '—';
       };
 
+      const selectedPlanEl = document.querySelector('[name="plan_id"]:checked');
+      let planTitle = '—';
+      if (selectedPlanEl) {
+        const cardEl = selectedPlanEl.closest('.vol-plan-card');
+        if (cardEl) {
+          planTitle = cardEl.querySelector('.plan-title').textContent + ' (' + cardEl.querySelector('.plan-price').textContent + ')';
+        }
+      }
+
       const rows = [
         ['Full Name',          get('full_name')],
-        ['Email',              get('email')],
-        ['Phone',              get('phone')],
+        ['Email Address',      get('email')],
+        ['Mobile Number',      get('phone')],
         ['Date of Birth',      get('dob')],
         ['Gender',             get('gender')],
         ['City / State',       get('city') + ', ' + get('state')],
@@ -608,12 +780,13 @@
         ['Hours / Week',       get('hours_per_week') + ' hrs'],
         ['Skills',             get('skills') || '—'],
         ['Prior Experience',   radio('prior_experience')],
+        ['Support Plan',       planTitle],
       ];
 
       let html = '<table style="width:100%;border-collapse:collapse;font-size:13px;">';
       rows.forEach(([label, value]) => {
         html += `<tr>
-          <td style="padding:9px 12px;border-bottom:1px solid #edf2f7;color:#718096;font-weight:600;white-space:nowrap;">${label}</td>
+          <td style="padding:9px 12px;border-bottom:1px solid #edf2f7;color:#718096;font-weight:600;white-space:nowrap;width:160px;">${label}</td>
           <td style="padding:9px 12px;border-bottom:1px solid #edf2f7;color:#2d3748;">${value || '—'}</td>
         </tr>`;
       });
@@ -641,36 +814,101 @@
       if (currentStep > 1) showStep(currentStep - 1);
     });
 
-    /* ── Form Submit ── */
+    /* ── Form Submit (Payment Gateway Integration) ── */
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const errors = validateStep(4);
+      const errors = validateStep(5);
       if (errors.length) { showError(errors); return; }
 
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting…';
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Initializing payment…';
+      errBanner.style.display = 'none';
 
       try {
-        const fd = new FormData(form);
-        const resp = await fetch('api/submit-volunteer.php', { method: 'POST', body: fd });
-        const data = await resp.json();
+        // Step 1: Request Razorpay Order Creation from API
+        const plan_id = document.querySelector('[name="plan_id"]:checked').value;
+        const fd = new FormData();
+        fd.append('plan_id', plan_id);
 
-        if (data.success) {
-          // Hide form, show success
-          form.style.display         = 'none';
-          document.querySelector('.vol-form-steps').style.display = 'none';
-          document.querySelector('.vol-form-nav').style.display   = 'none';
-          successPnl.style.display   = 'block';
-          document.getElementById('volRefBadge').textContent = 'Reference: #' + (data.reference || 'VOL-00001');
-        } else {
-          showError([data.message || 'Submission failed. Please try again.']);
+        const orderResp = await fetch('api/create-razorpay-order.php', {
+          method: 'POST',
+          body: fd
+        });
+        const orderData = await orderResp.json();
+
+        if (!orderData.success) {
+          showError([orderData.message || 'Payment Order generation failed.']);
           submitBtn.disabled = false;
-          submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Application';
+          submitBtn.innerHTML = '<i class="fa-solid fa-credit-card"></i> Pay &amp; Join';
+          return;
         }
+
+        // Step 2: Open Razorpay Checkout modal
+        const options = {
+          "key": orderData.key_id,
+          "amount": orderData.amount,
+          "currency": "INR",
+          "name": "The Global Rise Foundation",
+          "description": "Volunteer Support - " + orderData.plan_title,
+          "image": "assets/logo.png",
+          "order_id": orderData.order_id,
+          "handler": async function (paymentResp) {
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Finalizing registration…';
+
+            try {
+              // Step 3: Send details & payment signatures to API
+              const submitFd = new FormData(form);
+              submitFd.append('razorpay_payment_id', paymentResp.razorpay_payment_id);
+              submitFd.append('razorpay_order_id', paymentResp.razorpay_order_id);
+              submitFd.append('razorpay_signature', paymentResp.razorpay_signature);
+
+              const regResp = await fetch('api/submit-volunteer.php', {
+                method: 'POST',
+                body: submitFd
+              });
+              const regData = await regResp.json();
+
+              if (regData.success) {
+                form.style.display = 'none';
+                document.querySelector('.vol-form-steps').style.display = 'none';
+                document.querySelector('.vol-form-nav').style.display   = 'none';
+                errBanner.style.display = 'none';
+                successPnl.style.display = 'block';
+                document.getElementById('volRefBadge').textContent = 'Reference: #' + (regData.reference || 'VOL-00001');
+              } else {
+                showError([regData.message || 'Verification complete but details saving failed.']);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fa-solid fa-credit-card"></i> Pay &amp; Join';
+              }
+            } catch (err) {
+              showError(['Network error during verification. Contact coordinate office with Payment ID: ' + paymentResp.razorpay_payment_id]);
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = '<i class="fa-solid fa-credit-card"></i> Pay &amp; Join';
+            }
+          },
+          "prefill": {
+            "name": document.getElementById('full_name').value.trim(),
+            "email": document.getElementById('email').value.trim(),
+            "contact": document.getElementById('phone').value.trim()
+          },
+          "theme": {
+            "color": "#1b5182"
+          },
+          "modal": {
+            "ondismiss": function() {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = '<i class="fa-solid fa-credit-card"></i> Pay &amp; Join';
+            }
+          }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+
       } catch (err) {
-        showError(['Network error. Please check your connection and try again.']);
+        showError(['Failed connecting to payment server. Check connection details.']);
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Submit Application';
+        submitBtn.innerHTML = '<i class="fa-solid fa-credit-card"></i> Pay &amp; Join';
       }
     });
 
