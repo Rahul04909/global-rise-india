@@ -1,0 +1,626 @@
+/* CSS styles for Online Donations Page */
+
+.donate-page-section {
+  background-color: #f7fafc; /* Soft light gray background */
+  padding: 40px 0;
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  color: #2d3748;
+}
+
+.donate-page-section .header-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- Breadcrumb Header Banner --- */
+.donate-breadcrumb-banner {
+  background-color: #ebf3fc;
+  padding: 15px 0;
+  width: 100%;
+  border-bottom: 1px solid #cbd5e0;
+}
+
+.donate-breadcrumb-banner .header-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.donate-breadcrumb {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #718096;
+}
+
+.donate-breadcrumb a {
+  color: #1b5182;
+  text-decoration: none;
+}
+
+.donate-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.donate-breadcrumb-separator {
+  margin: 0 8px;
+  color: #a0aec0;
+}
+
+.donate-page-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1b5182;
+  margin-top: 6px;
+}
+
+/* --- Welfare Cause Tabs --- */
+.donate-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 30px;
+}
+
+.donate-tab-btn {
+  flex: 1 1 150px;
+  background: none;
+  border: none;
+  border-right: 1px solid #f0f0f0;
+  padding: 15px 12px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: #555555;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  text-align: center;
+}
+
+.donate-tab-btn i {
+  font-size: 18px;
+  color: #718096;
+  transition: color 0.25s;
+}
+
+.donate-tab-btn:hover {
+  background-color: #f7fafc;
+  color: #1b5182;
+}
+
+.donate-tab-btn:hover i {
+  color: #1b5182;
+}
+
+.donate-tab-btn.active {
+  background-color: #1b5182;
+  color: #ffffff;
+}
+
+.donate-tab-btn.active i {
+  color: #ffffff;
+}
+
+/* Remove last border */
+.donate-tab-btn:last-child {
+  border-right: none;
+}
+
+/* --- Form Container Card --- */
+.donate-form-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef2f6;
+  padding: 35px;
+  box-sizing: border-box;
+}
+
+/* Form Sections */
+.donate-form-section-title {
+  background-color: #eef5fc;
+  color: #1b5182;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin: 30px 0 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.donate-form-section-title:first-of-type {
+  margin-top: 0;
+}
+
+/* Radio Button Selectors (Citizenship & Type) */
+.donate-radio-group {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.donate-selector-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border: 1.5px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #4a5568;
+  cursor: pointer;
+  background-color: #ffffff;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+/* Hide native inputs */
+.donate-selector-label input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Styled radio check indicator circle */
+.donate-radio-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e0;
+  display: inline-block;
+  position: relative;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.donate-selector-label:hover {
+  border-color: #1b5182;
+  color: #1b5182;
+}
+
+/* Radio button active states */
+.donate-selector-label.selected {
+  border-color: #1b5182;
+  background-color: #ebf3fc;
+  color: #1b5182;
+}
+
+.donate-selector-label.selected .donate-radio-circle {
+  border-color: #1b5182;
+}
+
+.donate-selector-label.selected .donate-radio-circle::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background-color: #1b5182;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+}
+
+/* --- Amount Grid --- */
+.donate-amount-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.donate-amount-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 6px;
+  border: 1.5px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #4a5568;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+}
+
+.donate-amount-btn:hover {
+  border-color: #1b5182;
+  color: #1b5182;
+  background-color: #f7fafc;
+}
+
+.donate-amount-btn.active {
+  background-color: #1b5182;
+  border-color: #1b5182;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(27, 81, 130, 0.2);
+}
+
+/* Custom Other Amount Wrapper */
+.donate-custom-amount-wrapper {
+  width: 100%;
+  max-width: 380px;
+  margin: 15px auto 25px auto;
+  position: relative;
+  text-align: center;
+}
+
+.donate-custom-amount-input {
+  width: 100%;
+  padding: 12px 45px 12px 20px;
+  border: 1.5px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #2d3748;
+  box-sizing: border-box;
+  text-align: center;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.donate-custom-amount-input:focus {
+  border-color: #1b5182;
+  box-shadow: 0 0 0 3px rgba(27, 81, 130, 0.15);
+}
+
+.donate-custom-amount-wrapper::before {
+  content: '₹';
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 700;
+  color: #718096;
+  font-size: 16px;
+}
+
+/* placeholder style */
+.donate-custom-amount-input::placeholder {
+  color: #a0aec0;
+  font-weight: 500;
+}
+
+/* --- Dynamic Dynamic Calculation Panel --- */
+.donate-summary-alert {
+  background-color: #e6f6ec;
+  border-left: 4px solid #13a34a;
+  padding: 16px 20px;
+  border-radius: 4px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #276749;
+  line-height: 1.5;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.donate-summary-alert i {
+  font-size: 18px;
+  color: #13a34a;
+}
+
+/* --- Morning Nutrition Add-on Checkbox Panel --- */
+.donate-addon-panel {
+  background-color: #fffaf0;
+  border: 1px solid #feebc8;
+  padding: 16px;
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #7b341e;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.donate-addon-checkbox {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  cursor: pointer;
+  accent-color: #13a34a;
+  flex-shrink: 0;
+}
+
+.donate-addon-num-input {
+  width: 65px;
+  padding: 4px 6px;
+  border: 1.5px solid #cbd5e0;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 4px;
+  outline: none;
+}
+
+.donate-addon-num-input:focus {
+  border-color: #1b5182;
+}
+
+/* --- Input Fields & Form Grid --- */
+.donate-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 30px;
+}
+
+.donate-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.donate-form-group.col-span-2 {
+  grid-column: span 2;
+}
+
+.donate-form-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #4a5568;
+}
+
+.donate-form-label span.required {
+  color: #e53e3e;
+  margin-left: 2px;
+}
+
+.donate-input-field {
+  padding: 10px 14px;
+  border: 1.5px solid #cbd5e0;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #2d3748;
+  background-color: #ffffff;
+  outline: none;
+  transition: all 0.2s;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.donate-input-field:focus {
+  border-color: #1b5182;
+  box-shadow: 0 0 0 3px rgba(27, 81, 130, 0.12);
+}
+
+/* Title selector width helper */
+.donate-name-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.donate-title-select {
+  width: 90px;
+  flex-shrink: 0;
+}
+
+/* --- 80(G) Exemption Form Accordion --- */
+.donate-exemption-checkbox-wrapper {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.donate-exemption-subform {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0, 1, 0, 1); /* fast slide open */
+  background-color: #f7fafc;
+  border-radius: 6px;
+  margin-top: 12px;
+  box-sizing: border-box;
+}
+
+.donate-exemption-subform.open {
+  max-height: 400px;
+  padding: 20px;
+  border: 1px dashed #cbd5e0;
+  transition: max-height 0.4s cubic-bezier(1, 0, 1, 0);
+}
+
+/* --- Math Security Captcha --- */
+.donate-captcha-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin: 25px 0 15px 0;
+  background-color: #f7fafc;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1.5px solid #edf2f7;
+  width: fit-content;
+}
+
+.donate-captcha-question {
+  font-size: 16px;
+  font-weight: 700;
+  color: #4a5568;
+  background-color: #edf2f7;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid #cbd5e0;
+  letter-spacing: 1px;
+}
+
+.donate-captcha-input {
+  width: 90px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.donate-checkbox-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #4a5568;
+  margin-top: 20px;
+}
+
+.donate-checkbox-consent input {
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.donate-checkbox-consent a {
+  color: #1b5182;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.donate-checkbox-consent a:hover {
+  text-decoration: underline;
+}
+
+/* --- Submit Section --- */
+.donate-submit-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 40px;
+  border-top: 1.5px solid #edf2f7;
+  padding-top: 30px;
+  text-align: center;
+}
+
+.btn-donate-submit {
+  background-color: #13a34a;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 15px 55px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(19, 163, 74, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-donate-submit:hover {
+  background-color: #0f853b;
+  box-shadow: 0 6px 18px rgba(19, 163, 74, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-donate-submit:active {
+  transform: translateY(1px);
+}
+
+.donate-trust-badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  opacity: 0.85;
+}
+
+.donate-badge-img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
+/* --- Validation Error Styling --- */
+.donate-error-message {
+  color: #e53e3e;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+  display: none;
+}
+
+.donate-input-field.error {
+  border-color: #e53e3e;
+  background-color: #fff5f5;
+}
+
+/* ----------------------------------------------------
+   RESPONSIVE DESIGN BREAKPOINTS
+---------------------------------------------------- */
+
+@media (max-width: 1024px) {
+  .donate-amount-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on tablet */
+  }
+}
+
+@media (max-width: 768px) {
+  .donate-form-card {
+    padding: 25px;
+  }
+  .donate-form-grid {
+    grid-template-columns: 1fr; /* Stack inputs vertically */
+  }
+  .donate-form-group.col-span-2 {
+    grid-column: span 1;
+  }
+  .donate-amount-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on small viewports */
+    gap: 10px;
+  }
+  .donate-tab-btn {
+    padding: 12px 8px;
+    font-size: 11px;
+  }
+  .donate-page-title {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .donate-amount-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+  }
+  .donate-radio-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .donate-selector-label {
+    width: 100%;
+  }
+  .btn-donate-submit {
+    width: 100%;
+    justify-content: center;
+    padding: 15px 20px;
+  }
+}

@@ -1,0 +1,235 @@
+/* CSS styles for SDG Goals Component */
+
+.sdg-section {
+  background-color: #ffffff; /* Clean white background */
+  padding: 60px 0;
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.sdg-section .header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Section Heading --- */
+.sdg-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.sdg-subtitle {
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #111111;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.sdg-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: #111111;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+/* --- Grid Layout --- */
+.sdg-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+  width: 100%;
+}
+
+/* --- Hexagon Card Styles (Coded in CSS/SVG) --- */
+.sdg-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 380 / 440;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-sizing: border-box;
+}
+
+/* Card Image Wrapper (specifically for card #8 using the webp asset) */
+.sdg-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 380 / 440;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-decoration: none;
+}
+
+.sdg-card-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Background SVG for Coded Hexagons */
+.sdg-card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.12));
+  transition: filter 0.3s ease;
+}
+
+/* Coded Card Content Layer */
+.sdg-card-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* SDG Icon styling */
+.sdg-icon {
+  width: 58px;
+  height: 58px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sdg-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: #ffffff;
+}
+
+/* Horizontal line shadow divider */
+.sdg-divider {
+  width: 60%;
+  height: 1.5px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 20%,
+    rgba(0, 0, 0, 0.2) 80%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  margin: 18px 0;
+}
+
+/* Headline titles inside hexagons */
+.sdg-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  line-height: 1.35;
+  color: #ffffff;
+  margin-bottom: 12px;
+  max-width: 90%;
+  word-wrap: break-word;
+}
+
+/* Goal Numbers */
+.sdg-number {
+  font-size: 21px;
+  font-weight: 700;
+  color: #ffffff;
+  opacity: 0.95;
+  margin-bottom: 10px;
+}
+
+/* --- Hover states --- */
+.sdg-card:hover,
+.sdg-card-img-wrapper:hover {
+  transform: translateY(-8px) scale(1.03);
+}
+
+.sdg-card:hover .sdg-card-bg {
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.18));
+}
+
+/* ----------------------------------------------------
+   RESPONSIVE DESIGN BREAKPOINTS
+---------------------------------------------------- */
+
+@media (max-width: 1100px) {
+  .sdg-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3x2 on tablet/laptop */
+    gap: 20px;
+    max-width: 900px;
+  }
+  .sdg-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sdg-section {
+    padding: 45px 0;
+  }
+  .sdg-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2x3 on mobile/tablet */
+    gap: 15px;
+    max-width: 600px;
+  }
+  .sdg-title {
+    font-size: 1.7rem;
+  }
+  .sdg-subtitle {
+    font-size: 12px;
+  }
+  .sdg-icon {
+    width: 52px;
+    height: 52px;
+  }
+  .sdg-label {
+    font-size: 10px;
+  }
+  .sdg-number {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sdg-grid {
+    grid-template-columns: repeat(2, 1fr); /* Keep 2-column or wrap depending on size */
+    gap: 12px;
+  }
+  .sdg-title {
+    font-size: 1.4rem;
+  }
+  .sdg-icon {
+    width: 45px;
+    height: 45px;
+  }
+  .sdg-label {
+    font-size: 9px;
+  }
+  .sdg-number {
+    font-size: 17px;
+  }
+}

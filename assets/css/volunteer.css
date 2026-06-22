@@ -1,0 +1,686 @@
+/* ============================================================
+   Volunteer Page CSS — The Global Rise Foundation
+   ============================================================ */
+
+/* --- Page wrapper --- */
+.volunteer-page {
+  background-color: #f7fafc;
+  font-family: 'Montserrat', sans-serif;
+  color: #2d3748;
+  min-height: 100vh;
+}
+
+/* ── Hero Banner ─────────────────────────────────────────────── */
+.volunteer-hero {
+  background: linear-gradient(135deg, #1b5182 0%, #113252 100%);
+  color: #ffffff;
+  padding: 52px 0 42px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.volunteer-hero::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.volunteer-hero .header-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.vol-breadcrumbs {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+}
+
+.vol-breadcrumbs a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.vol-breadcrumbs a:hover {
+  text-decoration: underline;
+}
+
+.vol-breadcrumbs .sep {
+  margin: 0 8px;
+  opacity: 0.4;
+}
+
+.volunteer-hero-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.volunteer-hero-sub {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 580px;
+  line-height: 1.65;
+  font-weight: 500;
+}
+
+/* ── Why Volunteer — 3 Icon Cards row ───────────────────────── */
+.vol-why-section {
+  background-color: #ffffff;
+  padding: 55px 0 50px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.vol-why-section .header-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.vol-section-heading {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1b5182;
+  margin-bottom: 38px;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: 12px;
+}
+
+.vol-section-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #13a34a;
+  border-radius: 2px;
+}
+
+.vol-why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-top: 10px;
+}
+
+.vol-why-card {
+  background: #f8fafc;
+  border: 1px solid #e8edf5;
+  border-radius: 10px;
+  padding: 30px 25px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vol-why-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(27, 81, 130, 0.09);
+}
+
+.vol-why-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1b5182, #2a74b5);
+  color: #ffffff;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  box-shadow: 0 4px 14px rgba(27, 81, 130, 0.2);
+}
+
+.vol-why-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 10px;
+}
+
+.vol-why-card p {
+  font-size: 13px;
+  color: #718096;
+  line-height: 1.65;
+}
+
+/* ── Form Section ────────────────────────────────────────────── */
+.vol-form-section {
+  background-color: #f7fafc;
+  padding: 55px 0 70px;
+}
+
+.vol-form-section .header-container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.vol-form-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 45px 50px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+/* Progress Steps */
+.vol-form-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  gap: 0;
+}
+
+.vol-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.vol-step-number {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #718096;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.vol-step.active .vol-step-number,
+.vol-step.done .vol-step-number {
+  background: #1b5182;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(27, 81, 130, 0.25);
+}
+
+.vol-step.done .vol-step-number::after {
+  content: '\f00c';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+}
+
+.vol-step.done .vol-step-number span {
+  display: none;
+}
+
+.vol-step-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #a0aec0;
+  text-align: center;
+  line-height: 1.3;
+  max-width: 80px;
+  transition: color 0.3s;
+}
+
+.vol-step.active .vol-step-label,
+.vol-step.done .vol-step-label {
+  color: #1b5182;
+}
+
+.vol-step-connector {
+  flex: 1;
+  height: 2px;
+  background: #e2e8f0;
+  margin: 0 8px;
+  margin-bottom: 24px;
+  transition: background 0.3s;
+  min-width: 40px;
+}
+
+.vol-step-connector.done {
+  background: #1b5182;
+}
+
+/* Form fieldset panels */
+.vol-fieldset {
+  display: none;
+}
+
+.vol-fieldset.active {
+  display: block;
+}
+
+.vol-fieldset-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1b5182;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 1.5px solid #edf2f7;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vol-fieldset-title i {
+  color: #13a34a;
+}
+
+/* Form grid rows */
+.vol-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.vol-form-row.full {
+  grid-template-columns: 1fr;
+}
+
+.vol-form-row.thirds {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* Field wrapper */
+.vol-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vol-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #4a5568;
+  letter-spacing: 0.2px;
+}
+
+.vol-label .req {
+  color: #e53e3e;
+  margin-left: 2px;
+}
+
+.vol-input,
+.vol-select,
+.vol-textarea {
+  width: 100%;
+  padding: 11px 15px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13.5px;
+  color: #2d3748;
+  background: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.vol-input:focus,
+.vol-select:focus,
+.vol-textarea:focus {
+  border-color: #1b5182;
+  box-shadow: 0 0 0 3px rgba(27, 81, 130, 0.08);
+}
+
+.vol-input.error,
+.vol-select.error,
+.vol-textarea.error {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.08);
+}
+
+.vol-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%231b5182' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 38px;
+}
+
+.vol-textarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.6;
+}
+
+.vol-field-hint {
+  font-size: 11.5px;
+  color: #a0aec0;
+  line-height: 1.4;
+}
+
+.vol-field-error {
+  font-size: 11.5px;
+  color: #e53e3e;
+  display: none;
+}
+
+/* Checkbox / Radio pills */
+.vol-checkbox-group,
+.vol-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.vol-option-pill {
+  position: relative;
+}
+
+.vol-option-pill input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.vol-option-pill label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 50px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.vol-option-pill input:checked + label {
+  background: #1b5182;
+  border-color: #1b5182;
+  color: #ffffff;
+}
+
+.vol-option-pill label:hover {
+  border-color: #1b5182;
+  color: #1b5182;
+}
+
+.vol-option-pill input:checked + label:hover {
+  background: #134069;
+  color: #ffffff;
+}
+
+/* Hours slider */
+.vol-range-wrap {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.vol-range-input {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to right, #1b5182 0%, #1b5182 var(--pct, 25%), #e2e8f0 var(--pct, 25%));
+  outline: none;
+  cursor: pointer;
+}
+
+.vol-range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #1b5182;
+  box-shadow: 0 2px 6px rgba(27, 81, 130, 0.3);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.vol-range-input::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.vol-range-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1b5182;
+  min-width: 60px;
+  text-align: right;
+}
+
+/* Terms checkbox */
+.vol-terms-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 5px;
+}
+
+.vol-terms-check {
+  width: 18px;
+  height: 18px;
+  accent-color: #1b5182;
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.vol-terms-text {
+  font-size: 13px;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.vol-terms-text a {
+  color: #1b5182;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.vol-terms-text a:hover {
+  text-decoration: underline;
+}
+
+/* Navigation Buttons */
+.vol-form-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 35px;
+  padding-top: 25px;
+  border-top: 1.5px solid #edf2f7;
+}
+
+.vol-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 30px;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+}
+
+.vol-btn-prev {
+  background: #ffffff;
+  color: #4a5568;
+  border: 1.5px solid #e2e8f0;
+}
+
+.vol-btn-prev:hover {
+  border-color: #1b5182;
+  color: #1b5182;
+}
+
+.vol-btn-next {
+  background: #1b5182;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(27, 81, 130, 0.2);
+  margin-left: auto;
+}
+
+.vol-btn-next:hover {
+  background: #134069;
+  box-shadow: 0 6px 18px rgba(27, 81, 130, 0.3);
+  transform: translateY(-1px);
+}
+
+.vol-btn-submit {
+  background: #13a34a;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(19, 163, 74, 0.22);
+  margin-left: auto;
+}
+
+.vol-btn-submit:hover {
+  background: #0f853b;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(19, 163, 74, 0.3);
+}
+
+.vol-btn-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Success Message ─────────────────────────────────────────── */
+.vol-success-panel {
+  display: none;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.vol-success-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #13a34a, #0e7a37);
+  color: #ffffff;
+  font-size: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  box-shadow: 0 6px 20px rgba(19, 163, 74, 0.25);
+  animation: vol-bounce 0.5s ease;
+}
+
+@keyframes vol-bounce {
+  0%   { transform: scale(0.7); opacity: 0; }
+  60%  { transform: scale(1.1); }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+.vol-success-panel h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1b5182;
+  margin-bottom: 12px;
+}
+
+.vol-success-panel p {
+  font-size: 14.5px;
+  color: #4a5568;
+  line-height: 1.7;
+  max-width: 440px;
+  margin: 0 auto 10px;
+}
+
+.vol-ref-badge {
+  display: inline-block;
+  background: #ebf3fc;
+  color: #1b5182;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 25px;
+  border-radius: 50px;
+  margin: 18px 0;
+  letter-spacing: 0.5px;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .vol-why-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .vol-form-card {
+    padding: 35px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .volunteer-hero-title {
+    font-size: 1.75rem;
+  }
+
+  .vol-form-card {
+    padding: 28px 20px;
+  }
+
+  .vol-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .vol-form-row.thirds {
+    grid-template-columns: 1fr;
+  }
+
+  .vol-why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vol-form-steps {
+    gap: 0;
+  }
+
+  .vol-step-label {
+    display: none;
+  }
+
+  .vol-step-connector {
+    min-width: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .volunteer-hero {
+    padding: 38px 0 30px;
+  }
+
+  .volunteer-hero-title {
+    font-size: 1.5rem;
+  }
+
+  .vol-btn {
+    padding: 11px 20px;
+    font-size: 12.5px;
+  }
+}

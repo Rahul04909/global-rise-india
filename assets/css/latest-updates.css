@@ -1,0 +1,269 @@
+/* ============================================
+   Latest Updates / Blog Slider Component CSS
+   The Global Rise Foundation
+   ============================================ */
+
+.latest-updates-section {
+  background-color: #f8fafc;
+  padding: 65px 0 70px;
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  border-top: 1px solid #edf2f7;
+}
+
+.latest-updates-section .header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* --- Section Heading --- */
+.latest-updates-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1b5182;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 14px;
+  margin-bottom: 50px;
+  /* centre the inline-block */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.latest-updates-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #13a34a;
+  border-radius: 2px;
+}
+
+/* --- Slider Wrapper --- */
+.updates-slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* Arrow Buttons */
+.updates-arrow {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 2px solid #e2e8f0;
+  color: #1b5182;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  z-index: 2;
+  user-select: none;
+}
+
+.updates-arrow:hover {
+  background-color: #1b5182;
+  border-color: #1b5182;
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(27, 81, 130, 0.25);
+  transform: scale(1.08);
+}
+
+.updates-arrow:active {
+  transform: scale(0.96);
+}
+
+.updates-arrow-prev {
+  margin-right: 18px;
+}
+
+.updates-arrow-next {
+  margin-left: 18px;
+}
+
+/* Sliding Viewport */
+.updates-track-viewport {
+  flex: 1;
+  overflow: hidden;
+}
+
+.updates-track {
+  display: flex;
+  gap: 25px;
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+/* --- Individual Blog Card --- */
+.update-card {
+  flex: 0 0 calc((100% - 50px) / 3); /* Show exactly 3 cards */
+  background-color: #ffffff;
+  border: 1px solid #e8edf5;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.update-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 28px rgba(27, 81, 130, 0.1);
+}
+
+/* Card Image */
+.update-card-img-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: #e8edf5;
+  flex-shrink: 0;
+}
+
+.update-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
+}
+
+.update-card:hover .update-card-img {
+  transform: scale(1.04);
+}
+
+/* Card Body */
+.update-card-body {
+  padding: 22px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Date */
+.update-card-date {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1b5182;
+  margin-bottom: 10px;
+  letter-spacing: 0.2px;
+}
+
+/* Title */
+.update-card-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #2d3748;
+  line-height: 1.55;
+  margin-bottom: 18px;
+  flex: 1;
+}
+
+/* Read More Link */
+.update-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1b5182;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: color 0.2s, gap 0.2s;
+  margin-top: auto;
+}
+
+.update-card-link i {
+  font-size: 11px;
+  transition: transform 0.2s ease;
+}
+
+.update-card-link:hover {
+  color: #13a34a;
+  gap: 10px;
+}
+
+.update-card-link:hover i {
+  transform: translateX(4px);
+}
+
+/* --- Dots Indicator --- */
+.updates-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 36px;
+}
+
+.updates-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #cbd5e0;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.25s ease, width 0.25s ease;
+  padding: 0;
+}
+
+.updates-dot.active {
+  background-color: #1b5182;
+  width: 24px;
+  border-radius: 4px;
+  transform: scaleY(1);
+}
+
+/* ====================================
+   RESPONSIVE BREAKPOINTS
+   ==================================== */
+
+@media (max-width: 900px) {
+  .update-card {
+    flex: 0 0 calc((100% - 25px) / 2); /* 2 cards */
+  }
+}
+
+@media (max-width: 600px) {
+  .latest-updates-section {
+    padding: 45px 0 50px;
+  }
+
+  .latest-updates-title {
+    font-size: 1.65rem;
+    margin-bottom: 35px;
+  }
+
+  .updates-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .updates-arrow-prev {
+    margin-right: 10px;
+  }
+
+  .updates-arrow-next {
+    margin-left: 10px;
+  }
+
+  .update-card {
+    flex: 0 0 100%; /* 1 card on mobile */
+  }
+
+  .update-card-body {
+    padding: 18px 18px 22px;
+  }
+}

@@ -1,0 +1,204 @@
+/* CSS styles for Contributor Testimonial Slider Component */
+
+.contributor-section {
+  background-color: #3170a2; /* Match the medium blue from the screenshot */
+  padding: 40px 0;
+  color: #ffffff;
+  position: relative;
+  width: 100%;
+}
+
+.contributor-section .header-container {
+  position: relative;
+  max-width: 1200px;
+}
+
+/* --- Section Heading --- */
+.contributor-title {
+  text-align: center;
+  font-family: var(--font-nav); /* Montserrat */
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #ffffff;
+}
+
+/* Custom green highlight line under the word "Biggest" */
+.title-highlight {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.title-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #8cc63f; /* Bright lime green accent from the screenshot */
+  border-radius: 2px;
+}
+
+
+/* --- Slider Elements --- */
+.contributor-slider-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 190px;
+  overflow: hidden;
+}
+
+.contributor-slides-track {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Individual Slide */
+.contributor-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 0 60px;
+  box-sizing: border-box;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.contributor-slide.active {
+  opacity: 1;
+  z-index: 2;
+  position: relative; /* Take up height in the document flow */
+}
+
+/* Portrait Image */
+.contrib-image-wrapper {
+  flex-shrink: 0;
+}
+
+.contrib-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  display: block;
+}
+
+/* Testimonial Text */
+.contrib-text-block {
+  flex-grow: 1;
+  max-width: 600px;
+}
+
+.contrib-quote {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #f0f0f0;
+  margin-bottom: 20px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.contrib-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #8cc63f; /* Accent green name text */
+  margin-bottom: 4px;
+}
+
+.contrib-role {
+  font-size: 0.88rem;
+  color: #dddddd;
+  font-weight: 500;
+}
+
+
+/* --- Controls --- */
+.contrib-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 26px;
+  cursor: pointer;
+  z-index: 10;
+  padding: 10px;
+  transition: all var(--transition-speed);
+}
+
+.contrib-arrow:hover {
+  color: #ffffff;
+  transform: translateY(-50%) scale(1.15);
+}
+
+.contrib-arrow-left {
+  left: 0;
+}
+
+.contrib-arrow-right {
+  right: 0;
+}
+
+
+
+
+/* ----------------------------------------------------
+   RESPONSIVE DESIGN BREAKPOINTS
+---------------------------------------------------- */
+
+@media (max-width: 991px) {
+  .contributor-slide {
+    padding: 0 40px;
+    gap: 30px;
+  }
+  .contrib-img {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contributor-title {
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+  }
+  
+  .contributor-slide {
+    flex-direction: column;
+    text-align: center;
+    padding: 0 10px;
+    gap: 20px;
+  }
+  
+  .contrib-img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .contrib-text-block {
+    max-width: 100%;
+  }
+
+  .contrib-quote {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+  /* Hide side arrows on small screens, rely on swipe gestures */
+  .contrib-arrow {
+    display: none;
+  }
+}

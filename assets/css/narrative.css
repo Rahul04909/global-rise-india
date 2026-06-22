@@ -1,0 +1,256 @@
+/* CSS styles for Narrative Component */
+
+.narrative-section {
+  background-color: #ebf3fc; /* Soft, light blue background matching screenshot */
+  padding: 60px 0;
+  width: 100%;
+  font-family: var(--font-nav);
+}
+
+/* --- Section Heading --- */
+.narrative-title {
+  text-align: center;
+  font-family: var(--font-nav);
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--color-primary); /* Dark blue */
+}
+
+/* Accent highlight under the word "Narrative" */
+.title-narrative-highlight {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.title-narrative-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #13a34a; /* Green underline banner */
+  border-radius: 2px;
+}
+
+/* Central badge below title */
+.narrative-badge {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 40px auto;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 2px;
+  letter-spacing: 0.8px;
+}
+
+/* --- Grid Structure --- */
+.narrative-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1.25fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.narrative-col {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+/* Testimonial Block layout */
+.narrative-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.narrative-block-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* Circled numbers */
+.narrative-circle-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  border: 2px solid currentColor; /* Takes color dynamically */
+  flex-shrink: 0;
+}
+
+.narrative-block-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  text-decoration: underline;
+  letter-spacing: 0.2px;
+}
+
+/* --- Bullet list stylings --- */
+.narrative-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.narrative-list > li {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #333333;
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 18px;
+}
+
+.narrative-list > li::before {
+  content: '•';
+  position: absolute;
+  left: 3px;
+  top: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444444;
+}
+
+/* Custom bold headers in bullets */
+.narrative-list > li > strong {
+  color: #111111;
+  font-weight: 700;
+}
+
+/* Indented sub-bullets (dashes) */
+.narrative-sub-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 8px 0;
+}
+
+.narrative-sub-list > li {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #555555;
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 15px;
+}
+
+.narrative-sub-list > li::before {
+  content: '–'; /* En-dash */
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #777777;
+}
+
+
+/* --- Color variations for cause categories --- */
+
+/* Cause 1: Blue */
+.cause-blue {
+  color: var(--color-primary);
+}
+.cause-blue .narrative-block-title {
+  text-decoration-color: var(--color-primary);
+}
+
+/* Cause 2: Green */
+.cause-green {
+  color: #13a34a;
+}
+.cause-green .narrative-block-title {
+  text-decoration-color: #13a34a;
+}
+
+/* Cause 3: Orange */
+.cause-orange {
+  color: #e67e22;
+}
+.cause-orange .narrative-block-title {
+  text-decoration-color: #e67e22;
+}
+
+
+/* --- Center Infographic Image --- */
+.narrative-center {
+  text-align: center;
+}
+
+.key-circle-img {
+  width: 100%;
+  max-width: 330px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  transition: transform var(--transition-speed) ease-in-out;
+}
+
+.narrative-center:hover .key-circle-img {
+  transform: rotate(1deg) scale(1.01);
+}
+
+
+/* ----------------------------------------------------
+   RESPONSIVE DESIGN BREAKPOINTS
+---------------------------------------------------- */
+
+@media (max-width: 1200px) {
+  .narrative-grid {
+    gap: 25px;
+  }
+  .key-circle-img {
+    max-width: 290px;
+  }
+}
+
+@media (max-width: 991px) {
+  /* Flex direction column stacking with order mapping */
+  .narrative-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .narrative-col-left {
+    order: 1;
+    width: 100%;
+  }
+  
+  .narrative-center {
+    order: 2;
+    width: 100%;
+    margin: 15px 0;
+  }
+  
+  .narrative-col-right {
+    order: 3;
+    width: 100%;
+  }
+
+  .key-circle-img {
+    max-width: 270px;
+  }
+}
+
+@media (max-width: 768px) {
+  .narrative-section {
+    padding: 40px 0;
+  }
+  .narrative-title {
+    font-size: 1.7rem;
+  }
+  .narrative-grid {
+    gap: 30px;
+  }
+}

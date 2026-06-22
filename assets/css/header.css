@@ -1,0 +1,468 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lora:ital,wght@0,600;0,700;1,500&display=swap');
+
+/* CSS Variables for design system */
+:root {
+  --color-primary: #1b5182;       /* Professional Blue (Akshaya Patra) */
+  --color-accent-green: #13a34a;  /* Donate Button Green */
+  --color-text-dark: #333333;     /* Main text */
+  --color-text-muted: #555555;    /* Top bar & icon text */
+  --color-border: #e0e0e0;        /* Borders and separators */
+  --color-bg-light: #ffffff;      /* Header background */
+  --color-topbar-bg: #ffffff;     /* Top utility bar background */
+  
+  --font-nav: 'Montserrat', sans-serif;
+  --font-logo: 'Lora', serif;
+  
+  --transition-speed: 0.3s;
+  --header-height-desktop: 110px;
+}
+
+/* Reset and base header styles */
+.site-header {
+  width: 100%;
+  background-color: var(--color-bg-light);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 1000;
+  font-family: var(--font-nav);
+}
+
+.header-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+/* ----------------------------------------------------
+   1. TOP UTILITY BAR
+---------------------------------------------------- */
+.top-bar {
+  border-bottom: 1px solid var(--color-border);
+  padding: 8px 0;
+  font-size: 13.5px;
+}
+
+.top-bar .header-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+
+.top-bar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-speed);
+  font-weight: 500;
+}
+
+.top-bar-item i {
+  color: var(--color-text-muted);
+  font-size: 15px;
+}
+
+/* Specific styling to match the screenshot */
+.top-bar-item.tender-notice {
+  color: var(--color-primary);
+}
+
+.top-bar-item.tender-notice i {
+  color: var(--color-text-muted); /* Darker grey gavel icon */
+}
+
+.top-bar-item:hover {
+  color: var(--color-primary);
+}
+
+/* Country Selector styling */
+.country-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.country-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #fff;
+  border: 1px solid #c4c4c4;
+  border-radius: 4px;
+  padding: 4px 30px 4px 10px;
+  font-size: 13.5px;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  font-family: var(--font-nav);
+  outline: none;
+  font-weight: 500;
+  transition: border-color var(--transition-speed);
+}
+
+.country-select:focus,
+.country-select:hover {
+  border-color: var(--color-primary);
+}
+
+.country-select-wrapper::after {
+  content: '\f078'; /* FontAwesome Chevron Down */
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 10px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-dark);
+  pointer-events: none;
+}
+
+
+/* ----------------------------------------------------
+   2. MAIN NAVIGATION BAR
+---------------------------------------------------- */
+.main-nav-bar {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo Styling */
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 60px;
+  width: auto;
+  max-width: 100%;
+  display: block;
+  transition: transform var(--transition-speed) ease;
+}
+
+.logo-link:hover .logo-img {
+  transform: scale(1.02);
+}
+
+/* Nav Menu Styles */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--color-text-dark);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  transition: color var(--transition-speed);
+  padding: 8px 0;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: width var(--transition-speed);
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Navigation Action Buttons */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 10px;
+}
+
+.btn-header {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all var(--transition-speed);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-donate {
+  background-color: var(--color-accent-green);
+  color: #ffffff;
+}
+
+.btn-donate:hover {
+  background-color: #0f863b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(19, 163, 74, 0.3);
+}
+
+.btn-login {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.btn-login:hover {
+  background-color: #15416b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(27, 81, 130, 0.3);
+}
+
+
+/* Hamburger button (hidden on desktop) */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 1001;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: var(--color-text-dark);
+  border-radius: 3px;
+  transition: all var(--transition-speed);
+}
+
+
+/* ----------------------------------------------------
+   3. MOBILE NAV DRAWER (Hidden on desktop)
+---------------------------------------------------- */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 320px;
+  height: 100vh;
+  background-color: #ffffff;
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+  z-index: 1005;
+  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 30px 24px;
+  box-sizing: border-box;
+}
+
+.mobile-drawer.open {
+  right: 0;
+}
+
+.mobile-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mobile-logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.drawer-close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--color-text-dark);
+  padding: 5px;
+  transition: color var(--transition-speed);
+}
+
+.drawer-close-btn:hover {
+  color: var(--color-primary);
+}
+
+.mobile-nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mobile-nav-link {
+  text-decoration: none;
+  color: var(--color-text-dark);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: block;
+  padding: 8px 0;
+  transition: color var(--transition-speed);
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.mobile-nav-link:hover {
+  color: var(--color-primary);
+  padding-left: 5px;
+}
+
+.mobile-nav-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 35px;
+}
+
+.mobile-nav-actions .btn-header {
+  width: 100%;
+}
+
+.mobile-drawer-divider {
+  height: 1px;
+  background-color: var(--color-border);
+  margin-bottom: 25px;
+}
+
+/* Mobile top-bar utility items */
+.mobile-utilities {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: auto;
+}
+
+.mobile-utility-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color var(--transition-speed);
+}
+
+.mobile-utility-item i {
+  font-size: 16px;
+  width: 20px;
+}
+
+.mobile-utility-item:hover {
+  color: var(--color-primary);
+}
+
+.mobile-utility-item.tender-notice {
+  color: var(--color-primary);
+}
+
+.mobile-utility-item.tender-notice i {
+  color: var(--color-text-muted);
+}
+
+/* Overlay for drawer */
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1004;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+body.drawer-open {
+  overflow: hidden;
+}
+
+
+/* ----------------------------------------------------
+   4. RESPONSIVE BREAKPOINTS
+---------------------------------------------------- */
+
+/* Laptop / Large Tablet breakpoint: menu wrapping prevention */
+@media (max-width: 1200px) {
+  .nav-menu {
+    gap: 12px;
+  }
+  .nav-link {
+    font-size: 11px;
+  }
+  .btn-header {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+  .logo-img {
+    height: 52px;
+  }
+}
+
+/* Standard Tablet / Mobile View */
+@media (max-width: 1024px) {
+  /* Hide desktop top-bar */
+  .top-bar {
+    display: none;
+  }
+  
+  /* Hide desktop nav menu & action buttons */
+  .nav-menu,
+  .nav-actions {
+    display: none;
+  }
+  
+  /* Show hamburger button */
+  .hamburger {
+    display: flex;
+  }
+  
+  .main-nav-bar {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .logo-img {
+    height: 44px;
+  }
+}

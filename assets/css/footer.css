@@ -1,0 +1,299 @@
+/* CSS styles for Footer Component */
+
+.site-footer {
+  background-color: #f7f9fa;
+  width: 100%;
+  padding-top: 60px;
+  font-family: var(--font-nav);
+  color: var(--color-text-dark);
+  border-top: 1px solid var(--color-border);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr 0.9fr 0.9fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+/* --- COLUMN 1: BRANDING & QR CODE --- */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-brand-logo {
+  height: 52px;
+  width: auto;
+  max-width: fit-content;
+  margin-bottom: 15px;
+}
+
+.footer-tagline {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #666666;
+  margin-bottom: 20px;
+  max-width: 280px;
+}
+
+/* Social links styling */
+.footer-socials {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.footer-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: var(--color-accent-green);
+  background-color: rgba(19, 163, 74, 0.08);
+  font-size: 15px;
+  text-decoration: none;
+  transition: all var(--transition-speed);
+}
+
+.footer-social-link:hover {
+  background-color: var(--color-accent-green);
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(19, 163, 74, 0.2);
+}
+
+/* QR Code Card box */
+.footer-qr-card {
+  background-color: #ffffff;
+  border: 1px solid #d9383a; /* Red border */
+  border-radius: 4px;
+  padding: 10px;
+  width: 170px;
+  box-sizing: border-box;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.footer-qr-title {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #d9383a;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+}
+
+.footer-qr-image {
+  width: 140px;
+  height: 140px;
+  display: block;
+  margin: 0 auto;
+}
+
+.footer-qr-caption {
+  font-size: 9.5px;
+  color: #555555;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.footer-qr-caption span {
+  color: #d9383a;
+  font-weight: 700;
+}
+
+
+/* --- COLUMNS 2, 3, 4: NAVIGATION LISTS --- */
+.footer-nav-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-nav-col h3 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #333333;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.footer-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links-list li {
+  margin-bottom: 12px;
+}
+
+.footer-link {
+  font-size: 12px;
+  color: #666666;
+  text-decoration: none;
+  transition: color var(--transition-speed);
+  font-weight: 500;
+}
+
+.footer-link:hover {
+  color: var(--color-primary);
+  padding-left: 2px;
+}
+
+/* Secondary header within columns (e.g. GET IN TOUCH, GET INVOLVED) */
+.footer-nav-col h3.sub-heading {
+  margin-top: 25px;
+}
+
+
+/* --- COLUMN 5: CERTIFICATIONS --- */
+.footer-certifications {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.gptw-logo-img {
+  width: 110px;
+  height: auto;
+  display: block;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+
+/* --- COPYRIGHT & CHARITY INFO SECTION --- */
+.footer-info-bar {
+  border-top: 1px solid #e2e6e9;
+  padding: 20px 0;
+  font-size: 11.5px;
+  color: #888888;
+  font-weight: 500;
+}
+
+.footer-info-bar .header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* --- SILHOUETTE STRIP & WHATSAPP --- */
+.footer-silhouette {
+  width: 100%;
+  height: 180px;
+  background-image: url('../footer_bg.png'); /* Relative to assets/css/ */
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  position: relative;
+  border-top: 1px solid rgba(27, 81, 130, 0.08);
+}
+
+/* WhatsApp Floating Button (Global fixed contact helper) */
+.whatsapp-float-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 55px;
+  height: 55px;
+  background-color: #25d366;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  cursor: pointer;
+  z-index: 999;
+  text-decoration: none;
+  transition: all var(--transition-speed) ease-in-out;
+}
+
+.whatsapp-float-btn:hover {
+  transform: scale(1.08) rotate(8deg);
+  background-color: #20ba59;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.55);
+}
+
+
+/* ----------------------------------------------------
+   RESPONSIVE DESIGN BREAKPOINTS
+---------------------------------------------------- */
+
+/* Large Tablets & Medium Laptops */
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 20px;
+  }
+  /* Push GPTW badge to a full-width row or position cleanly */
+  .footer-certifications {
+    grid-column: span 4;
+    align-items: flex-start;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed #e2e6e9;
+  }
+  .gptw-logo-img {
+    width: 90px;
+  }
+}
+
+/* Medium Tablets */
+@media (max-width: 768px) {
+  .site-footer {
+    padding-top: 40px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .footer-brand {
+    grid-column: span 2;
+    margin-bottom: 20px;
+  }
+  .footer-certifications {
+    grid-column: span 2;
+    align-items: flex-start;
+  }
+  .footer-info-bar .header-container {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  .footer-silhouette {
+    height: 120px;
+  }
+  .whatsapp-float-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+/* Small Mobile Screens */
+@media (max-width: 480px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .footer-brand,
+  .footer-nav-col,
+  .footer-certifications {
+    grid-column: span 1;
+  }
+  .footer-tagline {
+    max-width: 100%;
+  }
+  .footer-silhouette {
+    height: 90px;
+  }
+}

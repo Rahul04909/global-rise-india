@@ -1,0 +1,314 @@
+/* Shared CSS Styles for Social Initiative Pages (our-work) */
+
+.page-body {
+  background-color: #ffffff;
+  color: #2d3748;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+}
+
+/* --- Page Hero Section --- */
+.initiative-hero {
+  background: linear-gradient(135deg, #1b5182 0%, #113252 100%);
+  color: #ffffff;
+  padding: 50px 0;
+  width: 100%;
+}
+
+.initiative-hero .header-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Breadcrumbs inside Hero */
+.initiative-breadcrumbs {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.initiative-breadcrumbs a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.initiative-breadcrumbs a:hover {
+  opacity: 0.9;
+  text-decoration: underline;
+}
+
+.initiative-breadcrumbs span.separator {
+  margin: 0 8px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Page H1 Title */
+.initiative-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.25;
+}
+
+/* --- Layout Grid --- */
+.initiative-layout-grid {
+  max-width: 1100px;
+  margin: 45px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 40px;
+}
+
+/* --- Main Content Column --- */
+.initiative-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+.initiative-content-block h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #1b5182;
+  margin-bottom: 15px;
+  position: relative;
+  padding-bottom: 8px;
+  display: inline-block;
+}
+
+/* Accent underline matching home components */
+.initiative-content-block h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: #13a34a; /* Green underline accent */
+  border-radius: 1.5px;
+}
+
+.initiative-content-block p {
+  font-size: 14.5px;
+  color: #4a5568;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+.initiative-content-block p:last-child {
+  margin-bottom: 0;
+}
+
+/* Bullet Lists styling */
+.initiative-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.initiative-bullet-list li {
+  font-size: 14px;
+  color: #4a5568;
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 24px;
+}
+
+.initiative-bullet-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #13a34a;
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.initiative-bullet-list li strong {
+  color: #2d3748;
+}
+
+/* Highlight boxes */
+.initiative-quote-box {
+  background-color: #ebf3fc;
+  border-left: 4px solid #1b5182;
+  padding: 20px;
+  border-radius: 4px;
+  margin: 15px 0;
+}
+
+.initiative-quote-box p {
+  font-style: italic;
+  font-weight: 500;
+  font-size: 14px;
+  color: #1b5182;
+  margin-bottom: 0;
+}
+
+/* --- Cause Visual Banner --- */
+.initiative-banner-wrapper {
+  width: 100%;
+  max-height: 380px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 5px;
+  border: 1px solid #edf2f7;
+}
+
+.initiative-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.initiative-banner-wrapper:hover .initiative-main-img {
+  transform: scale(1.015);
+}
+
+/* --- Sidebar Column --- */
+.initiative-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Sidebar Donation CTA Widget Card */
+.sidebar-cta-card {
+  background-color: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 30px 25px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+.sidebar-cta-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1b5182;
+  margin-bottom: 10px;
+}
+
+.sidebar-cta-card p {
+  font-size: 13px;
+  color: #718096;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.sidebar-cta-button {
+  display: inline-block;
+  background-color: #13a34a;
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 12px 35px;
+  border-radius: 5px;
+  text-decoration: none;
+  letter-spacing: 0.8px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 8px rgba(19, 163, 74, 0.2);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sidebar-cta-button:hover {
+  background-color: #0f853b;
+  box-shadow: 0 6px 14px rgba(19, 163, 74, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Sidebar lists (other initiatives links) */
+.sidebar-links-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 25px;
+}
+
+.sidebar-links-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin-bottom: 18px;
+  border-bottom: 1.5px solid #edf2f7;
+  padding-bottom: 8px;
+}
+
+.sidebar-links-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-links-list li {
+  margin-bottom: 10px;
+}
+
+.sidebar-links-list li:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-links-list a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #4a5568;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s, padding-left 0.2s;
+}
+
+.sidebar-links-list a i {
+  font-size: 10px;
+  color: #1b5182;
+  transition: transform 0.2s;
+}
+
+.sidebar-links-list a:hover {
+  color: #1b5182;
+  padding-left: 5px;
+}
+
+.sidebar-links-list a:hover i {
+  transform: translateX(3px);
+}
+
+/* ----------------------------------------------------
+   RESPONSIVE DESIGN BREAKPOINTS
+---------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .initiative-layout-grid {
+    grid-template-columns: 1fr; /* Stack columns vertically */
+    gap: 30px;
+    margin: 30px auto;
+  }
+  .initiative-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .initiative-hero {
+    padding: 35px 0;
+  }
+  .initiative-title {
+    font-size: 1.5rem;
+  }
+  .initiative-content-block h2 {
+    font-size: 1.3rem;
+  }
+}
