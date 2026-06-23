@@ -36,19 +36,19 @@ if ($pos !== false) {
 
       <!-- Desktop Nav Links -->
       <ul class="nav-menu">
-        <li><a href="#" class="nav-link">Who We Are</a></li>
-        <li><a href="#" class="nav-link">What We Do</a></li>
-        <li><a href="#" class="nav-link">News & Stories</a></li>
-        <li><a href="#" class="nav-link">How To Help</a></li>
-        <li><a href="#" class="nav-link">Get Involved</a></li>
-        <li><a href="#" class="nav-link">Impact Reports</a></li>
-        <li><a href="#" class="nav-link">Blogs</a></li>
+        <li><a href="<?php echo $base_url; ?>pages/about-us.php" class="nav-link">Who We Are</a></li>
+        <li><a href="<?php echo $base_url; ?>pages/what-we-do.php" class="nav-link">What We Do</a></li>
+        <li><a href="<?php echo $base_url; ?>pages/news-stories.php" class="nav-link">News & Stories</a></li>
+        <li><a href="<?php echo $base_url; ?>pages/how-to-help.php" class="nav-link">How To Help</a></li>
+        <li><a href="<?php echo $base_url; ?>volunteer.php" class="nav-link">Get Involved</a></li>
+        <li><a href="<?php echo $base_url; ?>pages/impact-reports.php" class="nav-link">Impact Reports</a></li>
+        <li><a href="<?php echo $base_url; ?>pages/blogs.php" class="nav-link">Blogs</a></li>
       </ul>
 
       <!-- Desktop Action Buttons -->
       <div class="nav-actions">
         <a href="<?php echo $base_url; ?>donate.php" class="btn-header btn-donate">Donate Now</a>
-        <a href="#" class="btn-header btn-login">Log In</a>
+        <a href="<?php echo $base_url; ?>admin-login.php" class="btn-header btn-login">Log In</a>
       </div>
 
       <!-- Hamburger Menu (Mobile/Tablet Toggle) -->
@@ -75,19 +75,19 @@ if ($pos !== false) {
 
     <!-- Mobile Nav Links -->
     <ul class="mobile-nav-links">
-      <li><a href="#" class="mobile-nav-link">Who We Are</a></li>
-      <li><a href="#" class="mobile-nav-link">What We Do</a></li>
-      <li><a href="#" class="mobile-nav-link">News & Stories</a></li>
-      <li><a href="#" class="mobile-nav-link">How To Help</a></li>
-      <li><a href="#" class="mobile-nav-link">Get Involved</a></li>
-      <li><a href="#" class="mobile-nav-link">Impact Reports</a></li>
-      <li><a href="#" class="mobile-nav-link">Blogs</a></li>
+      <li><a href="<?php echo $base_url; ?>pages/about-us.php" class="mobile-nav-link">Who We Are</a></li>
+      <li><a href="<?php echo $base_url; ?>pages/what-we-do.php" class="mobile-nav-link">What We Do</a></li>
+      <li><a href="<?php echo $base_url; ?>pages/news-stories.php" class="mobile-nav-link">News & Stories</a></li>
+      <li><a href="<?php echo $base_url; ?>pages/how-to-help.php" class="mobile-nav-link">How To Help</a></li>
+      <li><a href="<?php echo $base_url; ?>volunteer.php" class="mobile-nav-link">Get Involved</a></li>
+      <li><a href="<?php echo $base_url; ?>pages/impact-reports.php" class="mobile-nav-link">Impact Reports</a></li>
+      <li><a href="<?php echo $base_url; ?>pages/blogs.php" class="mobile-nav-link">Blogs</a></li>
     </ul>
 
     <!-- Mobile Action Buttons -->
     <div class="mobile-nav-actions">
       <a href="<?php echo $base_url; ?>donate.php" class="btn-header btn-donate">Donate Now</a>
-      <a href="#" class="btn-header btn-login">Log In</a>
+      <a href="<?php echo $base_url; ?>admin-login.php" class="btn-header btn-login">Log In</a>
     </div>
 
     <div class="mobile-drawer-divider"></div>
