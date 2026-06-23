@@ -17,11 +17,11 @@ if ($pos !== false) {
     <div class="header-container">
       <a href="mailto:info@globalrisefoundation.org" class="top-bar-item">
         <i class="fa-solid fa-envelope"></i>
-        info@globalrisefoundation.org
+        info@globalrisefoundation.com
       </a>
-      <a href="tel:+918049607200" class="top-bar-item">
+      <a href="tel:+9172920007777" class="top-bar-item">
         <i class="fa-solid fa-phone"></i>
-        +91 80 4960 7200 / 080-23474351 (BSNL)
+        +91 729200-07777
       </a>
     </div>
   </div>
@@ -94,13 +94,13 @@ if ($pos !== false) {
 
     <!-- Mobile Utilities (Top Bar items merged here) -->
     <div class="mobile-utilities">
-      <a href="mailto:info@globalrisefoundation.org" class="mobile-utility-item">
+      <a href="mailto:info@globalrisefoundation.com" class="mobile-utility-item">
         <i class="fa-solid fa-envelope"></i>
-        info@globalrisefoundation.org
+        info@globalrisefoundation.com
       </a>
-      <a href="tel:+918049607200" class="mobile-utility-item">
+      <a href="tel:+9172920007777" class="mobile-utility-item">
         <i class="fa-solid fa-phone"></i>
-        +91 80 4960 7200 / 080-23474351
+        +91 729200-07777
       </a>
     </div>
   </div>
