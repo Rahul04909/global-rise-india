@@ -29,6 +29,12 @@ if ($currentPage === 'volunteer-add.php') {
 } elseif ($currentPage === 'donation-view.php') {
     $targetPage = 'donations.php';
     $subPageTitle = 'View Donation Details';
+} elseif ($currentPage === 'article-add.php') {
+    $targetPage = 'articles.php';
+    $subPageTitle = 'Add Article';
+} elseif ($currentPage === 'article-edit.php') {
+    $targetPage = 'articles.php';
+    $subPageTitle = 'Edit Article';
 }
 
 $menuItems = [
@@ -52,6 +58,13 @@ $menuItems = [
         "icon" => "fas fa-heart",
         "pages" => [
             ["title" => "Manage Donations", "url" => "donations.php"]
+        ],
+    ],
+    [
+        "menuTitle" => "Blogs & Stories",
+        "icon" => "fas fa-newspaper",
+        "pages" => [
+            ["title" => "Manage Articles", "url" => "articles.php"]
         ],
     ],
     [

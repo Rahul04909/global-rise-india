@@ -1,3 +1,11 @@
+<?php
+require_once __DIR__ . '/../includes/config.php';
+$pdo = getDB();
+
+$stmt = $pdo->prepare("SELECT * FROM `articles` WHERE `type` = 'news' AND `status` = 'published' ORDER BY `created_at` DESC");
+$stmt->execute();
+$newsList = $stmt->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,75 +186,50 @@
 
       <!-- News and Stories Grid -->
       <div class="news-grid">
-        
-        <!-- News Item 1 -->
-        <div class="news-item">
-          <div class="news-item-img-wrapper">
-            <img src="../assets/images/slide1.png" alt="Centralized Kitchen Opening" class="news-item-img" loading="lazy">
+        <?php if (empty($newsList)): ?>
+          <div style="text-align: center; color: #718096; padding: 40px 0;">
+            <p>No news or stories found. Please check back later.</p>
           </div>
-          <div class="news-item-content">
-            <span class="news-badge">Press Release</span>
-            <h3>New Centralized Mid Day Meal Kitchen Launched in Bangalore</h3>
-            <div class="news-meta">
-              <span><i class="fa-regular fa-calendar"></i> June 15, 2026</span>
-              <span><i class="fa-regular fa-user"></i> Program Director</span>
+        <?php else: ?>
+          <?php foreach ($newsList as $news): 
+            $image_src = $news['image'] ?: 'assets/logo.png';
+            $summary = strip_tags($news['description']);
+            if (strlen($summary) > 160) {
+                $summary = substr($summary, 0, 157) . '...';
+            }
+            
+            // Generate simple category tags for the badge visually
+            $badge_class = '';
+            $badge_label = 'Update';
+            if (stripos($news['title'], 'kitchen') !== false || stripos($news['title'], 'meal') !== false) {
+                $badge_label = 'Press Release';
+            } elseif (stripos($news['title'], 'anita') !== false || stripos($news['title'], 'livelihood') !== false) {
+                $badge_class = 'success';
+                $badge_label = 'Success Story';
+            } elseif (stripos($news['title'], 'flood') !== false || stripos($news['title'], 'relief') !== false) {
+                $badge_class = 'alert';
+                $badge_label = 'Relief Update';
+            } else {
+                $badge_label = 'Ground Update';
+            }
+          ?>
+            <div class="news-item">
+              <div class="news-item-img-wrapper">
+                <img src="../<?= htmlspecialchars($image_src) ?>" alt="<?= htmlspecialchars($news['title']) ?>" class="news-item-img" loading="lazy">
+              </div>
+              <div class="news-item-content">
+                <span class="news-badge <?= $badge_class ?>"><?= $badge_label ?></span>
+                <h3><?= htmlspecialchars($news['title']) ?></h3>
+                <div class="news-meta">
+                  <span><i class="fa-regular fa-calendar"></i> <?= date('d F, Y', strtotime($news['created_at'])) ?></span>
+                  <span><i class="fa-regular fa-user"></i> Program Team</span>
+                </div>
+                <p><?= htmlspecialchars($summary) ?></p>
+                <a href="article-details.php?slug=<?= $news['slug'] ?>" class="news-read-more">Read Full Story <i class="fa-solid fa-chevron-right"></i></a>
+              </div>
             </div>
-            <p>To support more government school children and eradicate classroom hunger, we have inaugurated our new fully automated central kitchen in North Bangalore. Spanning 5,000 sq ft, this kitchen will prepare hot, nutritional meals for over 5,000 students daily under absolute hygiene standards.</p>
-            <a href="#" class="news-read-more">Read Full Story <i class="fa-solid fa-chevron-right"></i></a>
-          </div>
-        </div>
-
-        <!-- News Item 2 -->
-        <div class="news-item">
-          <div class="news-item-img-wrapper">
-            <img src="../assets/images/women_empowerment.png" alt="Anita graduation story" class="news-item-img" loading="lazy">
-          </div>
-          <div class="news-item-content">
-            <span class="news-badge success">Success Story</span>
-            <h3>Stitch by Stitch: How Anita Achieved Livelihood Independence</h3>
-            <div class="news-meta">
-              <span><i class="fa-regular fa-calendar"></i> May 28, 2026</span>
-              <span><i class="fa-regular fa-user"></i> Impact Team</span>
-            </div>
-            <p>Anita, a resident of an urban slum cluster, was struggle-ridden as the sole breadwinner for a family of four. After enrolling in our 6-month Vocational Tailoring program, she received a free sewing machine and entrepreneurial guidance. Today, Anita runs a home-based boutique, earning a stable livelihood and funding her children's schooling.</p>
-            <a href="#" class="news-read-more">Read Full Story <i class="fa-solid fa-chevron-right"></i></a>
-          </div>
-        </div>
-
-        <!-- News Item 3 -->
-        <div class="news-item">
-          <div class="news-item-img-wrapper">
-            <img src="../assets/images/disaster_relief.png" alt="Flood disaster relief dispatch" class="news-item-img" loading="lazy">
-          </div>
-          <div class="news-item-content">
-            <span class="news-badge alert">Relief Update</span>
-            <h3>Emergency Flood Relief Kits Dispatched to Rural Communities</h3>
-            <div class="news-meta">
-              <span><i class="fa-regular fa-calendar"></i> May 12, 2026</span>
-              <span><i class="fa-regular fa-user"></i> Disaster Response</span>
-            </div>
-            <p>In response to the flash floods affecting coastal hamlets, our rapid action force has set up temporary medical camps and successfully distributed 1,200 survival kits containing dry rations, sanitizers, chlorine tablets, and warm blankets to the displaced families.</p>
-            <a href="#" class="news-read-more">Read Full Story <i class="fa-solid fa-chevron-right"></i></a>
-          </div>
-        </div>
-
-        <!-- News Item 4 -->
-        <div class="news-item">
-          <div class="news-item-img-wrapper">
-            <img src="../assets/images/slide2.png" alt="Children study session" class="news-item-img" loading="lazy">
-          </div>
-          <div class="news-item-content">
-            <span class="news-badge">Ground Update</span>
-            <h3>Digital Learning Tools Introduced in Rural Primary Schools</h3>
-            <div class="news-meta">
-              <span><i class="fa-regular fa-calendar"></i> April 20, 2026</span>
-              <span><i class="fa-regular fa-user"></i> Education Specialist</span>
-            </div>
-            <p>To reduce learning loss and improve digital literacy, we have deployed 50 interactive tablet learning setups across three rural primary schools. These kits feature offline curriculum modules, visual sciences, and basic mathematics software, bringing digital pedagogy to remote corners.</p>
-            <a href="#" class="news-read-more">Read Full Story <i class="fa-solid fa-chevron-right"></i></a>
-          </div>
-        </div>
-
+          <?php endforeach; ?>
+        <?php endif; ?>
       </div>
 
     </article>

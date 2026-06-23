@@ -1,3 +1,11 @@
+<?php
+require_once __DIR__ . '/../includes/config.php';
+$pdo = getDB();
+
+$stmt = $pdo->prepare("SELECT * FROM `articles` WHERE `type` = 'blog' AND `status` = 'published' ORDER BY `created_at` DESC");
+$stmt->execute();
+$blogs = $stmt->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -147,71 +155,34 @@
 
       <!-- Blogs Grid -->
       <div class="blog-grid">
-        
-        <!-- Blog 1 -->
-        <div class="blog-card">
-          <div class="blog-card-img-wrapper">
-            <img src="../assets/images/slide3.png" alt="Children enjoying mid day meal" class="blog-card-img" loading="lazy">
+        <?php if (empty($blogs)): ?>
+          <div style="grid-column: 1 / -1; text-align: center; color: #718096; padding: 40px 0;">
+            <p>No blog posts found. Please check back later.</p>
           </div>
-          <div class="blog-card-content">
-            <div class="blog-card-meta">
-              <span><i class="fa-regular fa-calendar"></i> June 2, 2026</span>
-              <span><i class="fa-regular fa-folder"></i> Child Nutrition</span>
+        <?php else: ?>
+          <?php foreach ($blogs as $blog): 
+            $image_src = $blog['image'] ?: 'assets/logo.png';
+            $summary = strip_tags($blog['description']);
+            if (strlen($summary) > 160) {
+                $summary = substr($summary, 0, 157) . '...';
+            }
+          ?>
+            <div class="blog-card">
+              <div class="blog-card-img-wrapper">
+                <img src="../<?= htmlspecialchars($image_src) ?>" alt="<?= htmlspecialchars($blog['title']) ?>" class="blog-card-img" loading="lazy">
+              </div>
+              <div class="blog-card-content">
+                <div class="blog-card-meta">
+                  <span><i class="fa-regular fa-calendar"></i> <?= date('d F, Y', strtotime($blog['created_at'])) ?></span>
+                  <span><i class="fa-regular fa-folder"></i> Advocacy</span>
+                </div>
+                <h3><?= htmlspecialchars($blog['title']) ?></h3>
+                <p><?= htmlspecialchars($summary) ?></p>
+                <a href="article-details.php?slug=<?= $blog['slug'] ?>" class="blog-card-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
+              </div>
             </div>
-            <h3>Understanding Classroom Hunger & Learning Outcomes</h3>
-            <p>Why is nutritional security the most critical predictor of academic performance? We dive deep into school lunch impact statistics in underprivileged communities.</p>
-            <a href="#" class="blog-card-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- Blog 2 -->
-        <div class="blog-card">
-          <div class="blog-card-img-wrapper">
-            <img src="../assets/images/women_empowerment.png" alt="Women sewing machine project" class="blog-card-img" loading="lazy">
-          </div>
-          <div class="blog-card-content">
-            <div class="blog-card-meta">
-              <span><i class="fa-regular fa-calendar"></i> May 18, 2026</span>
-              <span><i class="fa-regular fa-folder"></i> Empowerment</span>
-            </div>
-            <h3>Women Micro-Enterprises: The Power of Sewing</h3>
-            <p>How a single vocational skill combined with asset distribution (sewing machines) creates structural wealth and breaks generational cycles of poverty.</p>
-            <a href="#" class="blog-card-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- Blog 3 -->
-        <div class="blog-card">
-          <div class="blog-card-img-wrapper">
-            <img src="../assets/images/rural_education.png" alt="Rural study centers" class="blog-card-img" loading="lazy">
-          </div>
-          <div class="blog-card-content">
-            <div class="blog-card-meta">
-              <span><i class="fa-regular fa-calendar"></i> May 5, 2026</span>
-              <span><i class="fa-regular fa-folder"></i> Education</span>
-            </div>
-            <h3>Beyond Charity: Sustainable Grassroots Ownership</h3>
-            <p>Looking at how decentralized village committees help maintain study centers, ensuring development remains driven by communities rather than external aid.</p>
-            <a href="#" class="blog-card-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </div>
-
-        <!-- Blog 4 -->
-        <div class="blog-card">
-          <div class="blog-card-img-wrapper">
-            <img src="../assets/images/animal_welfare.png" alt="Stray dogs rescue" class="blog-card-img" loading="lazy">
-          </div>
-          <div class="blog-card-content">
-            <div class="blog-card-meta">
-              <span><i class="fa-regular fa-calendar"></i> April 24, 2026</span>
-              <span><i class="fa-regular fa-folder"></i> Animal Welfare</span>
-            </div>
-            <h3>Street Animal Welfare: Creating Compassionate Cities</h3>
-            <p>Exploring stray dog feeding networks, emergency first aid, and vaccinations as essential strategies for safe and harmonious urban co-existence.</p>
-            <a href="#" class="blog-card-link">Read Article <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </div>
-
+          <?php endforeach; ?>
+        <?php endif; ?>
       </div>
 
     </article>
