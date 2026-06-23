@@ -7,50 +7,24 @@
  * in a responsive 3-card sliding carousel.
  */
 
-$latest_updates = [
-  [
-    'date'    => 'June 20, 2026',
-    'title'   => 'TGRF Distributes 500+ School Supply Kits to Urban Slum Children Ahead of New Academic Year',
-    'image'   => 'assets/images/slum_education.png',
-    'alt'     => 'Volunteers distributing school bags and stationery to slum children',
-    'link'    => '#',
-  ],
-  [
-    'date'    => 'May 14, 2026',
-    'title'   => 'Free Veterinary Medical Camp Vaccinates Over 800 Community Strays in Three Cities',
-    'image'   => 'assets/images/animal_welfare.png',
-    'alt'     => 'Veterinary volunteers administering anti-rabies vaccines to street dogs',
-    'link'    => '#',
-  ],
-  [
-    'date'    => 'April 07, 2026',
-    'title'   => 'Women Empowerment SHG Graduates 120 Rural Women in Tailoring & Digital Literacy',
-    'image'   => 'assets/images/women_empowerment.png',
-    'alt'     => 'Women at a TGRF vocational skills graduation ceremony',
-    'link'    => '#',
-  ],
-  [
-    'date'    => 'March 22, 2026',
-    'title'   => 'TGRF Partners with District Administration for Cyclone Relief — 10,000 Families Supported',
-    'image'   => 'assets/images/disaster_relief.png',
-    'alt'     => 'Relief volunteers distributing emergency kits to flood-affected families',
-    'link'    => '#',
-  ],
-  [
-    'date'    => 'February 28, 2026',
-    'title'   => 'Senior Citizen Care Drive: Monthly Meal & Medicine Kits Reach 350 Destitute Elders',
-    'image'   => 'assets/images/senior_care.png',
-    'alt'     => 'Senior citizens receiving meals and care support from TGRF team',
-    'link'    => '#',
-  ],
-  [
-    'date'    => 'January 15, 2026',
-    'title'   => '1,200 Wheelchair & Mobility Kits Distributed to Differently-Abled Persons Across Rural India',
-    'image'   => 'assets/images/disabled_persons.png',
-    'alt'     => 'A person with disability receiving a wheelchair from TGRF volunteers',
-    'link'    => '#',
-  ],
-];
+require_once __DIR__ . '/../includes/config.php';
+$pdo = getDB();
+
+// Fetch published articles of type 'blog' from database
+$stmt = $pdo->prepare("SELECT * FROM `articles` WHERE `type` = 'blog' AND `status` = 'published' ORDER BY `created_at` DESC LIMIT 6");
+$stmt->execute();
+$db_blogs = $stmt->fetchAll();
+
+$latest_updates = [];
+foreach ($db_blogs as $blog) {
+    $latest_updates[] = [
+        'date'  => date('F d, Y', strtotime($blog['created_at'])),
+        'title' => $blog['title'],
+        'image' => $blog['image'] ?: 'assets/logo.png',
+        'alt'   => $blog['title'],
+        'link'  => (isset($base_url) ? $base_url : '') . 'pages/article-details.php?slug=' . $blog['slug']
+    ];
+}
 ?>
 
 <!-- =====================================================
@@ -79,7 +53,7 @@ $latest_updates = [
             <!-- Image -->
             <div class="update-card-img-wrapper">
               <img
-                src="<?php echo htmlspecialchars($update['image']); ?>"
+                src="<?php echo (isset($base_url) ? $base_url : '') . htmlspecialchars($update['image']); ?>"
                 alt="<?php echo htmlspecialchars($update['alt']); ?>"
                 class="update-card-img"
                 loading="lazy"
