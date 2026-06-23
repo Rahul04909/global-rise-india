@@ -41,13 +41,13 @@ if ($pos !== false) {
     <div class="footer-nav-col">
       <h3>About Us</h3>
       <ul class="footer-links-list">
-        <li><a href="#" class="footer-link">About Us</a></li>
-        <li><a href="#" class="footer-link">Our Vision and Mission</a></li>
-        <li><a href="#" class="footer-link">Inspiration - The story of Hope</a></li>
-        <li><a href="#" class="footer-link">Board of Trustees</a></li>
-        <li><a href="#" class="footer-link">Tax exemption</a></li>
-        <li><a href="#" class="footer-link">donation faqs</a></li>
-        <li><a href="#" class="footer-link">Term's and Conditions</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/about-us.php" class="footer-link">About Us</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/vision-mission.php" class="footer-link">Our Vision and Mission</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/inspiration.php" class="footer-link">Inspiration - The Story of Hope</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/board-trustees.php" class="footer-link">Board of Trustees</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/tax-exemption.php" class="footer-link">Tax Exemption</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/donation-faqs.php" class="footer-link">Donation FAQs</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/terms-conditions.php" class="footer-link">Terms and Conditions</a></li>
       </ul>
     </div>
 
@@ -55,12 +55,15 @@ if ($pos !== false) {
     <div class="footer-nav-col">
       <h3>Our Work</h3>
       <ul class="footer-links-list">
-        <li><a href="#" class="footer-link">Our Work</a></li>
-        <li><a href="#" class="footer-link">Feeding For Education</a></li>
-        <li><a href="#" class="footer-link">Mid-Day Meal</a></li>
-        <li><a href="#" class="footer-link">Relief feeding</a></li>
-        <li><a href="#" class="footer-link">Research & Advocacy</a></li>
-        <li><a href="#" class="footer-link">Beyond Meals</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/animal-welfare.php" class="footer-link">Animal Welfare</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/disaster-management.php" class="footer-link">Disaster Management</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/educating-slum-children.php" class="footer-link">Educating Slum Children</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/health-projects.php" class="footer-link">Health Projects</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/persons-with-disabilities.php" class="footer-link">Persons with Disabilities</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/rural-children-education.php" class="footer-link">Rural Children Education</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/senior-citizen-care.php" class="footer-link">Senior Citizen Care</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/swacch-bharat-mission.php" class="footer-link">Swacch Bharat Mission</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/women-empowerment.php" class="footer-link">Women Empowerment</a></li>
       </ul>
     </div>
 
