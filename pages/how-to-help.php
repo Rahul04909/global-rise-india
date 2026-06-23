@@ -153,19 +153,19 @@
               </tr>
               <tr>
                 <td class="label-td">Bank Name</td>
-                <td class="value-td">Kotak Mahindra Bank</td>
+                <td class="value-td">Axis Bank Of India</td>
               </tr>
               <tr>
                 <td class="label-td">Account Number</td>
-                <td class="value-td">98480120300456</td>
+                <td class="value-td">926020024782390</td>
               </tr>
               <tr>
                 <td class="label-td">IFSC Code</td>
-                <td class="value-td">KKBK0000421</td>
+                <td class="value-td">UTIB0000348</td>
               </tr>
               <tr>
                 <td class="label-td">Branch Name</td>
-                <td class="value-td">Malleshwaram Main, Bangalore</td>
+                <td class="value-td">NIT Faridabad</td>
               </tr>
               <tr>
                 <td class="label-td">Account Type</td>
