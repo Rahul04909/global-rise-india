@@ -48,7 +48,7 @@ if ($pos !== false) {
       <!-- Desktop Action Buttons -->
       <div class="nav-actions">
         <a href="<?php echo $base_url; ?>donate.php" class="btn-header btn-donate">Donate Now</a>
-        <a href="<?php echo $base_url; ?>admin-login.php" class="btn-header btn-login">Log In</a>
+        <a href="<?php echo $base_url; ?>volunteer.php" class="btn-header btn-login">Volunteer</a>
       </div>
 
       <!-- Hamburger Menu (Mobile/Tablet Toggle) -->
@@ -87,7 +87,7 @@ if ($pos !== false) {
     <!-- Mobile Action Buttons -->
     <div class="mobile-nav-actions">
       <a href="<?php echo $base_url; ?>donate.php" class="btn-header btn-donate">Donate Now</a>
-      <a href="<?php echo $base_url; ?>admin-login.php" class="btn-header btn-login">Log In</a>
+      <a href="<?php echo $base_url; ?>volunteer.php" class="btn-header btn-login">Volunteer</a>
     </div>
 
     <div class="mobile-drawer-divider"></div>

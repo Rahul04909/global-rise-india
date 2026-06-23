@@ -65,44 +65,49 @@
   box-shadow: 0 4px 10px rgba(19, 163, 74, 0.2);
 }
 
-/* QR Code Card box */
-.footer-qr-card {
+/* Bank Details Card box */
+.footer-bank-card {
   background-color: #ffffff;
-  border: 1px solid #d9383a; /* Red border */
+  border: 1px solid #1b5182; /* Primary blue border */
   border-radius: 4px;
-  padding: 10px;
-  width: 170px;
+  padding: 12px 15px;
+  width: 250px;
   box-sizing: border-box;
-  text-align: center;
+  text-align: left;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
-.footer-qr-title {
-  font-size: 9.5px;
+.footer-bank-title {
+  font-size: 10.5px;
   font-weight: 700;
-  color: #d9383a;
+  color: #1b5182;
   text-transform: uppercase;
   margin-bottom: 8px;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid #eef2f5;
+  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.footer-qr-image {
-  width: 140px;
-  height: 140px;
-  display: block;
-  margin: 0 auto;
-}
-
-.footer-qr-caption {
-  font-size: 9.5px;
+.footer-bank-details {
+  font-size: 11px;
   color: #555555;
-  margin-top: 8px;
-  font-weight: 500;
+  line-height: 1.5;
 }
 
-.footer-qr-caption span {
-  color: #d9383a;
-  font-weight: 700;
+.footer-bank-details div {
+  margin-bottom: 4px;
+}
+
+.footer-bank-details div:last-child {
+  margin-bottom: 0;
+}
+
+.footer-bank-details div span {
+  color: #2d3748;
+  font-weight: 600;
 }
 
 

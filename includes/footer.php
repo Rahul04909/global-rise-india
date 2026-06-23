@@ -28,12 +28,17 @@ if ($pos !== false) {
         <a href="#" class="footer-social-link" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
       </div>
 
-      <!-- QR Code Card Box -->
-      <div class="footer-qr-card">
-        <div class="footer-qr-title">The Global Rise Foundation</div>
-        <!-- Generates UPI payload QR code dynamically -->
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&color=000000&data=upi://pay?pa=globalrise@kotak" alt="UPI Donation QR Code" class="footer-qr-image" loading="lazy">
-        <div class="footer-qr-caption">UPI ID: <span>globalrise@kotak</span></div>
+      <!-- Bank Details Card Box -->
+      <div class="footer-bank-card">
+        <div class="footer-bank-title"><i class="fa-solid fa-building-columns"></i> Bank Account Details</div>
+        <div class="footer-bank-details">
+          <div><span>A/C Name:</span> The Global Rise Foundation Trust</div>
+          <div><span>Bank Name:</span> Axis Bank Of India</div>
+          <div><span>A/C No:</span> 926020024782390</div>
+          <div><span>IFSC Code:</span> UTIB0000348</div>
+          <div><span>Branch:</span> NIT Faridabad</div>
+          <div><span>A/C Type:</span> Current Account</div>
+        </div>
       </div>
     </div>
 
@@ -98,7 +103,7 @@ if ($pos !== false) {
   <div class="footer-info-bar">
     <div class="header-container">
       <span>Charity Id : AAATT6468P</span>
-      <span>The Global Rise Foundation &copy; 2026</span>
+      <span>The Global Rise Foundation &copy; 2026 | A Website Designed By <a href="https://www.mineib.com" target="_blank" style="color: #666666; text-decoration: none; font-weight: 600;" onmouseover="this.style.color='#1b5182'" onmouseout="this.style.color='#666666'">Mineib Creative Technology</a></span>
     </div>
   </div>
 
