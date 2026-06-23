@@ -77,18 +77,18 @@ if ($pos !== false) {
       <h3>Donate</h3>
       <ul class="footer-links-list">
         <li><a href="<?php echo $footer_base_url; ?>donate.php" class="footer-link">Online donations</a></li>
-        <li><a href="<?php echo $footer_base_url; ?>donate.php" class="footer-link">Sponsor a School</a></li>
-        <li><a href="<?php echo $footer_base_url; ?>donate.php" class="footer-link">Sponsor a kitchen</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>donate.php" class="footer-link">Sponsor a Child Education</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>donate.php" class="footer-link">Sponsor Foods For Animals</a></li>
       </ul>
 
       <h3 class="sub-heading">Get in Touch</h3>
       <ul class="footer-links-list">
-        <li><a href="#" class="footer-link">Contact Us</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/contact-us.php" class="footer-link">Contact Us</a></li>
       </ul>
 
       <h3 class="sub-heading">Get Involved</h3>
       <ul class="footer-links-list">
-        <li><a href="#" class="footer-link">Future shaper</a></li>
+        <li><a href="<?php echo $footer_base_url; ?>pages/join-as-volunteer.php" class="footer-link">Join as Volunteer</a></li>
       </ul>
     </div>
 
@@ -102,7 +102,7 @@ if ($pos !== false) {
   <!-- Copyright and Charity Info Bar -->
   <div class="footer-info-bar">
     <div class="header-container">
-      <span>Charity Id : AAATT6468P</span>
+      <span>Charity Id : xxxxxxxx</span>
       <span>The Global Rise Foundation &copy; 2026 | A Website Designed By <a href="https://www.mineib.com" target="_blank" style="color: #666666; text-decoration: none; font-weight: 600;" onmouseover="this.style.color='#1b5182'" onmouseout="this.style.color='#666666'">Mineib Creative Technology</a></span>
     </div>
   </div>
