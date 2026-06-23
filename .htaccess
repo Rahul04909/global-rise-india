@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# Rewrite sitemap.xml to sitemap.php dynamically
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+</IfModule>
